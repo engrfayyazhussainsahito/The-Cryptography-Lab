@@ -43,16 +43,29 @@ window.AeadLab = {
     const btn = document.getElementById(id);
     if (!btn) return;
     if (active) {
+<<<<<<< HEAD
       btn.style.background = 'rgba(244, 63, 94, 0.15)';
       btn.style.borderColor = 'var(--accent-crimson)';
       btn.innerHTML = `<span style="color: var(--accent-crimson); font-weight: 700;">&times;</span> ${label} Tampered (1-bit flipped)`;
     } else {
       btn.style.background = 'var(--bg-card-subtle)';
       btn.style.borderColor = 'var(--border-medium)';
+=======
+      btn.style.background = 'rgba(244, 63, 94, 0.25)';
+      btn.style.borderColor = 'var(--accent-crimson)';
+      btn.innerHTML = `<span style="color: var(--accent-crimson);">&times;</span> ${label} Tampered! (1-bit flipped)`;
+    } else {
+      btn.style.background = 'rgba(255, 255, 255, 0.04)';
+      btn.style.borderColor = 'var(--border-subtle)';
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       btn.innerHTML = `Flip 1-bit in ${label}`;
     }
   },
 
+<<<<<<< HEAD
+=======
+  // Pseudo Poly1305 / GHASH authenticator
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   computeTag(key, nonce, ctBytes, aadBytes) {
     let acc = 0x811c9dc5;
     for (let i = 0; i < key.length; i++) acc = (acc ^ key.charCodeAt(i)) * 0x01000193;
@@ -60,6 +73,10 @@ window.AeadLab = {
     for (let i = 0; i < aadBytes.length; i++) acc = (acc ^ aadBytes[i]) * 0x01000193;
     for (let i = 0; i < ctBytes.length; i++) acc = (acc ^ ctBytes[i]) * 0x01000193;
 
+<<<<<<< HEAD
+=======
+    // Expand to 16 bytes (128 bits)
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     let hex = '';
     for (let i = 0; i < 4; i++) {
       acc = ((acc << 7) | (acc >>> 25)) ^ 0x9e3779b9;
@@ -79,13 +96,24 @@ window.AeadLab = {
     const ptBytes = Array.from(enc.encode(pt));
     let aadBytes = Array.from(enc.encode(aad));
 
+<<<<<<< HEAD
     let ctBytes = ptBytes.map((b, i) => b ^ ((key.charCodeAt(i % key.length) + i * 17) & 0xff));
     const originalTag = this.computeTag(key, nonce, ctBytes, aadBytes);
 
+=======
+    // Simple keystream simulation for CT
+    let ctBytes = ptBytes.map((b, i) => b ^ ((key.charCodeAt(i % key.length) + i * 17) & 0xff));
+
+    // Original valid tag computed by Sender
+    const originalTag = this.computeTag(key, nonce, ctBytes, aadBytes);
+
+    // Apply Active Man-in-the-Middle Tamper if toggled
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     let transmittedCt = [...ctBytes];
     let transmittedAad = [...aadBytes];
 
     if (this.tamperCiphertext && transmittedCt.length > 0) {
+<<<<<<< HEAD
       transmittedCt[0] ^= 0x01;
     }
     if (this.tamperAAD && transmittedAad.length > 0) {
@@ -102,11 +130,29 @@ window.AeadLab = {
     if (ctOut) ctOut.textContent = ctHex;
     if (tagOut) tagOut.textContent = originalTag.toUpperCase();
     if (rxTagOut) rxTagOut.textContent = receiverTag.toUpperCase();
+=======
+      transmittedCt[0] ^= 0x01; // flip 1 bit in first byte
+    }
+    if (this.tamperAAD && transmittedAad.length > 0) {
+      transmittedAad[0] ^= 0x01; // flip 1 bit in AAD
+    }
+
+    // Receiver recomputes tag over transmitted data
+    const receiverTag = this.computeTag(key, nonce, transmittedCt, transmittedAad);
+    const isAuthentic = originalTag === receiverTag;
+
+    // Render outputs
+    const ctHex = transmittedCt.map(b => b.toString(16).padStart(2, '0')).join('');
+    document.getElementById('aead-ct-out').textContent = ctHex;
+    document.getElementById('aead-tag-out').textContent = originalTag.toUpperCase();
+    document.getElementById('aead-rx-tag-out').textContent = receiverTag.toUpperCase();
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
 
     const statusBadge = document.getElementById('aead-status-badge');
     const msgEl = document.getElementById('aead-verification-details');
 
     if (isAuthentic) {
+<<<<<<< HEAD
       if (statusBadge) {
         statusBadge.className = 'status-pill status-secure';
         statusBadge.innerHTML = `&#10003; AUTHENTICATION VERIFIED`;
@@ -122,6 +168,15 @@ window.AeadLab = {
       if (msgEl) {
         msgEl.innerHTML = `<span style="color: var(--accent-crimson); font-weight: 600;">CRITICAL INTEGRITY FAILURE:</span> Receiver computed tag (<strong>${receiverTag.slice(0,8)}...</strong>) does NOT match transmitted tag (<strong>${originalTag.slice(0,8)}...</strong>). Payload discarded. <em>Decryption halted before releasing plaintext to application.</em>`;
       }
+=======
+      statusBadge.className = 'status-pill status-secure';
+      statusBadge.innerHTML = `&#10003; AUTHENTICATION VERIFIED`;
+      msgEl.innerHTML = `<span style="color: var(--accent-emerald);">AEAD Integrity Check Passed:</span> Receiver tag matches sender tag exactly. Payload is guaranteed to be authentic, untampered, and bound to the associated data. Decryption approved.`;
+    } else {
+      statusBadge.className = 'status-pill status-compromised';
+      statusBadge.innerHTML = `&times; TAMPER DETECTED: AUTHENTICATION FAILED`;
+      msgEl.innerHTML = `<span style="color: var(--accent-crimson);">CRITICAL SECURITY VIOLATION:</span> Receiver computed tag (<strong>${receiverTag.slice(0,8)}...</strong>) does NOT match transmitted tag (<strong>${originalTag.slice(0,8)}...</strong>). AEAD standard requires immediate termination with error. <em>Plaintext is NEVER delivered to the application layer.</em>`;
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     }
   }
 };

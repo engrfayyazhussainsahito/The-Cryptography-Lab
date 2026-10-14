@@ -18,6 +18,10 @@ window.PublicKeyLab = {
   },
 
   bindEvents() {
+<<<<<<< HEAD
+=======
+    // Tab switching
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     document.querySelectorAll('.pk-tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.pk-tab-btn').forEach(b => b.classList.remove('active'));
@@ -40,6 +44,7 @@ window.PublicKeyLab = {
   },
 
   updateView() {
+<<<<<<< HEAD
     const vRsa = document.getElementById('pk-view-rsa');
     const vEcc = document.getElementById('pk-view-ecc');
     const vEcdsa = document.getElementById('pk-view-ecdsa');
@@ -49,14 +54,28 @@ window.PublicKeyLab = {
     if (vEcc) vEcc.style.display = this.currentTab === 'ecc' ? 'block' : 'none';
     if (vEcdsa) vEcdsa.style.display = this.currentTab === 'ecdsa' ? 'block' : 'none';
     if (vShor) vShor.style.display = this.currentTab === 'shor' ? 'block' : 'none';
+=======
+    document.getElementById('pk-view-rsa').style.display = this.currentTab === 'rsa' ? 'block' : 'none';
+    document.getElementById('pk-view-ecc').style.display = this.currentTab === 'ecc' ? 'block' : 'none';
+    document.getElementById('pk-view-ecdsa').style.display = this.currentTab === 'ecdsa' ? 'block' : 'none';
+    document.getElementById('pk-view-shor').style.display = this.currentTab === 'shor' ? 'block' : 'none';
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
 
     if (this.currentTab === 'ecc') this.drawECC();
   },
 
+<<<<<<< HEAD
+=======
+  // Helper: GCD
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   gcd(a, b) {
     return !b ? a : this.gcd(b, a % b);
   },
 
+<<<<<<< HEAD
+=======
+  // Helper: Extended Euclidean Algorithm for modular inverse
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   modInverse(e, phi) {
     let m0 = phi, t, q;
     let x0 = 0, x1 = 1;
@@ -74,6 +93,10 @@ window.PublicKeyLab = {
     return x1;
   },
 
+<<<<<<< HEAD
+=======
+  // Modular exponentiation (base^exp % mod)
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   modPow(base, exp, mod) {
     let res = 1;
     base = base % mod;
@@ -93,6 +116,10 @@ window.PublicKeyLab = {
     const n = p * q;
     const phi = (p - 1) * (q - 1);
 
+<<<<<<< HEAD
+=======
+    // Pick e such that gcd(e, phi) == 1
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const candidateE = [17, 65537, 3, 5, 7, 11, 13];
     let e = 17;
     for (let c of candidateE) {
@@ -103,6 +130,7 @@ window.PublicKeyLab = {
     }
 
     const d = this.modInverse(e, phi);
+<<<<<<< HEAD
     const ciphertext = this.modPow(msg, e, n);
     const decrypted = this.modPow(ciphertext, d, n);
 
@@ -121,6 +149,23 @@ window.PublicKeyLab = {
     if (ptOut) ptOut.textContent = `Decrypted m = c^d mod n = ${ciphertext}^${d} mod ${n} = ${decrypted} (Original: ${msg})`;
   },
 
+=======
+
+    // Encrypt: c = m^e % n
+    const ciphertext = this.modPow(msg, e, n);
+    // Decrypt: m = c^d % n
+    const decrypted = this.modPow(ciphertext, d, n);
+
+    document.getElementById('rsa-modulus-out').textContent = `n = p * q = ${p} * ${q} = ${n}`;
+    document.getElementById('rsa-phi-out').textContent = `&phi;(n) = (${p}-1) * (${q}-1) = ${phi}`;
+    document.getElementById('rsa-pub-out').textContent = `Public Key (e, n) = (${e}, ${n})`;
+    document.getElementById('rsa-priv-out').textContent = `Private Key (d, n) = (${d}, ${n})`;
+    document.getElementById('rsa-ct-out').textContent = `Ciphertext c = m^e mod n = ${msg}^${e} mod ${n} = ${ciphertext}`;
+    document.getElementById('rsa-pt-out').textContent = `Decrypted m = c^d mod n = ${ciphertext}^${d} mod ${n} = ${decrypted} (Original: ${msg})`;
+  },
+
+  // Elliptic Curve Visualizer
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   initECCCanvas() {
     this.canvas = document.getElementById('ecc-canvas');
     if (!this.canvas) return;
@@ -141,10 +186,15 @@ window.PublicKeyLab = {
     const oy = h / 2;
     const scale = 32;
 
+<<<<<<< HEAD
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
 
     // Grid lines
     ctx.strokeStyle = isLight ? 'rgba(15, 23, 42, 0.08)' : 'rgba(255, 255, 255, 0.08)';
+=======
+    // Grid lines
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(0, oy); ctx.lineTo(w, oy);
@@ -154,7 +204,12 @@ window.PublicKeyLab = {
     const a = this.curveA;
     const b = this.curveB;
 
+<<<<<<< HEAD
     ctx.strokeStyle = isLight ? '#0284c7' : '#38bdf8';
+=======
+    // Draw Elliptic Curve: y^2 = x^3 + ax + b
+    ctx.strokeStyle = '#38bdf8';
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     ctx.lineWidth = 2.5;
 
     // Positive branch
@@ -187,6 +242,10 @@ window.PublicKeyLab = {
     }
     ctx.stroke();
 
+<<<<<<< HEAD
+=======
+    // Point P and Point Q
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const pSlider = parseFloat(document.getElementById('ecc-slider-p')?.value || '-1.5');
     const isDoubling = document.getElementById('ecc-mode-double')?.checked;
 
@@ -197,6 +256,10 @@ window.PublicKeyLab = {
 
     let x2, y2, lambda;
     if (isDoubling) {
+<<<<<<< HEAD
+=======
+      // Point Doubling: lambda = (3*x1^2 + a) / (2*y1)
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       lambda = (3 * x1 * x1 + a) / (2 * y1);
       x2 = x1;
       y2 = y1;
@@ -209,16 +272,29 @@ window.PublicKeyLab = {
       lambda = (y2 - y1) / (x2 - x1);
     }
 
+<<<<<<< HEAD
     const x3 = lambda * lambda - x1 - x2;
     const y3_neg = lambda * (x3 - x1) + y1;
     const y3 = -y3_neg;
 
+=======
+    // Intersection x3 = lambda^2 - x1 - x2
+    const x3 = lambda * lambda - x1 - x2;
+    const y3_neg = lambda * (x3 - x1) + y1;
+    const y3 = -y3_neg; // Reflect across x-axis
+
+    // Draw chord line through P and Q to -R
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const sx1 = ox + x1 * scale, sy1 = oy - y1 * scale;
     const sx2 = ox + x2 * scale, sy2 = oy - y2 * scale;
     const sx3 = ox + x3 * scale, sy3_neg = oy - y3_neg * scale;
     const sxR = ox + x3 * scale, syR = oy - y3 * scale;
 
+<<<<<<< HEAD
     ctx.strokeStyle = isLight ? 'rgba(225, 29, 72, 0.7)' : 'rgba(244, 63, 94, 0.7)';
+=======
+    ctx.strokeStyle = 'rgba(244, 63, 94, 0.7)';
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     ctx.setLineDash([4, 4]);
     ctx.beginPath();
     const lineX1 = -5, lineY1 = lambda * (lineX1 - x1) + y1;
@@ -227,19 +303,32 @@ window.PublicKeyLab = {
     ctx.lineTo(ox + lineX2 * scale, oy - lineY2 * scale);
     ctx.stroke();
 
+<<<<<<< HEAD
     ctx.strokeStyle = isLight ? 'rgba(124, 58, 237, 0.7)' : 'rgba(168, 85, 247, 0.7)';
+=======
+    // Vertical reflection line from -R to R
+    ctx.strokeStyle = 'rgba(168, 85, 247, 0.7)';
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     ctx.beginPath();
     ctx.moveTo(sx3, sy3_neg);
     ctx.lineTo(sxR, syR);
     ctx.stroke();
     ctx.setLineDash([]);
 
+<<<<<<< HEAD
+=======
+    // Draw Points
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const drawPoint = (x, y, label, color) => {
       ctx.fillStyle = color;
       ctx.beginPath();
       ctx.arc(x, y, 6, 0, Math.PI * 2);
       ctx.fill();
+<<<<<<< HEAD
       ctx.fillStyle = isLight ? '#0f172a' : '#fff';
+=======
+      ctx.fillStyle = '#fff';
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       ctx.font = '11px JetBrains Mono';
       ctx.fillText(label, x + 8, y - 6);
     };
@@ -249,6 +338,7 @@ window.PublicKeyLab = {
     drawPoint(sx3, sy3_neg, '-R', '#64748b');
     drawPoint(sxR, syR, isDoubling ? '2P' : 'R = P+Q', '#a855f7');
 
+<<<<<<< HEAD
     const coordsEl = document.getElementById('ecc-coords-out');
     if (coordsEl) {
       coordsEl.innerHTML = `
@@ -268,15 +358,48 @@ window.PublicKeyLab = {
     const k_reused = 15;
 
     const r = (k_reused * 7) % n;
+=======
+    document.getElementById('ecc-coords-out').innerHTML = `
+      <strong>Point Coordinates:</strong><br>
+      P = (${x1.toFixed(2)}, ${y1.toFixed(2)})<br>
+      ${isDoubling ? '2P' : 'R = P+Q'} = (${x3.toFixed(2)}, ${y3.toFixed(2)})<br>
+      <span style="color: var(--text-muted); font-size: 0.75rem;">Curve: y<sup>2</sup> = x<sup>3</sup> - 3x + 7. In cryptography, this group operation is performed over finite field &Fopf;<sub>p</sub> (secp256k1 / Curve25519) where discrete log is intractable classically.</span>
+    `;
+  },
+
+  // ECDSA Nonce Reuse Private Key Leak
+  runEcdsaLeak() {
+    // Curve parameters (toy group order n = 101)
+    const n = 101;
+    const z1 = 34; // hash of message 1
+    const z2 = 78; // hash of message 2
+    const d_true = 42; // true private key
+    const k_reused = 15; // fatal reused nonce
+
+    // r = (k * G).x % n
+    const r = (k_reused * 7) % n; // toy point scalar
+
+    // s1 = k^-1 * (z1 + r*d) % n
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const k_inv = this.modInverse(k_reused, n);
     const s1 = (k_inv * (z1 + r * d_true)) % n;
     const s2 = (k_inv * (z2 + r * d_true)) % n;
 
+<<<<<<< HEAD
+=======
+    // Attacker extracts nonce k:
+    // k = (z1 - z2) / (s1 - s2) mod n
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const s_diff = (s1 - s2 + n) % n;
     const s_diff_inv = this.modInverse(s_diff, n);
     const z_diff = (z1 - z2 + n) % n;
     const extracted_k = (z_diff * s_diff_inv) % n;
 
+<<<<<<< HEAD
+=======
+    // Attacker recovers private key d:
+    // d = (s1 * k - z1) / r mod n
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const r_inv = this.modInverse(r, n);
     const extracted_d = (((s1 * extracted_k - z1) % n + n) % n * r_inv) % n;
 
@@ -284,13 +407,22 @@ window.PublicKeyLab = {
     if (outEl) {
       outEl.innerHTML = `
         <div style="font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6;">
+<<<<<<< HEAD
           <span style="color: var(--accent-amber);">Signature 1:</span> (r: ${r}, s<sub>1</sub>: ${s1})<br>
           <span style="color: var(--accent-amber);">Signature 2:</span> (r: ${r}, s<sub>2</sub>: ${s2}) <strong style="color: var(--accent-crimson);">&larr; Identical r detected!</strong><br><br>
+=======
+          <span style="color: var(--accent-amber);">Signature 1 (Message 1):</span> (r: ${r}, s<sub>1</sub>: ${s1})<br>
+          <span style="color: var(--accent-amber);">Signature 2 (Message 2):</span> (r: ${r}, s<sub>2</sub>: ${s2}) <strong style="color: var(--accent-crimson);">&larr; Identical r detected!</strong><br><br>
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
           <strong>Step 1: Extracted Nonce k:</strong><br>
           k = (z<sub>1</sub> - z<sub>2</sub>) &middot; (s<sub>1</sub> - s<sub>2</sub>)<sup>-1</sup> mod n = <strong>${extracted_k}</strong> (Matches true k: ${k_reused})<br><br>
           <strong>Step 2: Private Key Extracted in O(1):</strong><br>
           d<sub>A</sub> = (s<sub>1</sub> &middot; k - z<sub>1</sub>) &middot; r<sup>-1</sup> mod n = <strong style="color: var(--accent-crimson); font-size: 1rem;">${extracted_d}</strong> (True Key: ${d_true})<br>
+<<<<<<< HEAD
           <span style="color: var(--text-muted); font-size: 0.75rem;">This exact vulnerability exposed the root private key of Sony's PS3 in 2010. Ed25519 (RFC 8032) eliminates nonce reuse by generating k deterministically.</span>
+=======
+          <span style="color: var(--text-muted); font-size: 0.75rem;">This identical vulnerability destroyed Sony's PlayStation 3 security in 2010. Ed25519 (RFC 8032) eliminates this by generating k deterministically: k = H(sk || message).</span>
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
         </div>
       `;
     }

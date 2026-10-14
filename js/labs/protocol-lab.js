@@ -27,6 +27,10 @@ window.ProtocolLab = {
       });
     });
 
+<<<<<<< HEAD
+=======
+    // Handshake steps
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     document.querySelectorAll('.tls-step-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         this.renderHandshakeStep(parseInt(btn.dataset.step, 10));
@@ -45,6 +49,7 @@ window.ProtocolLab = {
   },
 
   updateView() {
+<<<<<<< HEAD
     const vTls = document.getElementById('proto-view-tls');
     const vRat = document.getElementById('proto-view-ratchet');
     const vMer = document.getElementById('proto-view-merkle');
@@ -52,26 +57,46 @@ window.ProtocolLab = {
     if (vTls) vTls.style.display = this.currentTab === 'tls' ? 'block' : 'none';
     if (vRat) vRat.style.display = this.currentTab === 'ratchet' ? 'block' : 'none';
     if (vMer) vMer.style.display = this.currentTab === 'merkle' ? 'block' : 'none';
+=======
+    document.getElementById('proto-view-tls').style.display = this.currentTab === 'tls' ? 'block' : 'none';
+    document.getElementById('proto-view-ratchet').style.display = this.currentTab === 'ratchet' ? 'block' : 'none';
+    document.getElementById('proto-view-merkle').style.display = this.currentTab === 'merkle' ? 'block' : 'none';
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   },
 
   tlsSteps: [
     {
       title: 'Step 1: ClientHello (1-RTT Post-Quantum Hybrid Initiation)',
       origin: 'Client &rarr; Server',
+<<<<<<< HEAD
       payload: 'CipherSuites: TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256\nSupported_Groups: x25519_mlkem768\nKey_Share: Ephemeral Public Keys (X25519: 32B + ML-KEM-768: 1184B)\nExtensions: EncryptedClientHello (ECH)',
       state: 'Handshake State: Ephemeral client entropy transmitted in initial packet.'
+=======
+      payload: 'CipherSuites: TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256\nSupported_Groups: x25519_mlkem768\nKey_Share: Client Ephemeral Public Keys (X25519: 32B + ML-KEM-768: 1184B)\nExtensions: EncryptedClientHello (ECH hides SNI domain from network ISP)',
+      state: 'Handshake State: Ephemeral client entropy sent. Zero round-trip latency overhead compared to classical TLS.'
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     },
     {
       title: 'Step 2: ServerHello + Encrypted Extensions',
       origin: 'Server &rarr; Client',
+<<<<<<< HEAD
       payload: 'Selected_Group: x25519_mlkem768\nKey_Share: Server Ephemeral Key + ML-KEM Ciphertext (1088B)\nEncryptedExtensions: ALPN [h2, h3]\nCertificate: Server X.509 chain\nCertificateVerify: Signed with ML-DSA-65\nFinished: HMAC-SHA384 over handshake transcript',
       state: 'Server completes hybrid key exchange. Derives Handshake Secret via HKDF.'
+=======
+      payload: 'Selected_Group: x25519_mlkem768\nKey_Share: Server Ephemeral Public Key + ML-KEM Ciphertext (1088B)\n--- All Subsequent Packets Encrypted with Handshake Traffic Keys ---\nEncryptedExtensions: ALPN [h2, h3]\nCertificate: Server X.509 chain\nCertificateVerify: Signed with ML-DSA-65 / Dilithium\nFinished: HMAC-SHA384 over entire handshake transcript',
+      state: 'Server completes hybrid key agreement. Derives Handshake Secret using HKDF-Extract-and-Expand.'
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     },
     {
       title: 'Step 3: Client Finished & Application Traffic Established',
       origin: 'Client &rarr; Server',
+<<<<<<< HEAD
       payload: 'Finished: HMAC-SHA384 transcript authentication\nApplication Data: AES-256-GCM symmetric session keys active.\nForward Secrecy: Guaranteed via destroyed ephemeral DH keys.',
       state: 'Bidirectional encrypted data channel active. Protected against Harvest Now, Decrypt Later quantum recording.'
+=======
+      payload: 'Finished: HMAC-SHA384 transcript authentication\n--- Handshake Complete in Exactly 1 Round-Trip Time (1-RTT) ---\nApplication Data: AES-256-GCM symmetric session keys initialized.\nForward Secrecy: Guaranteed via ephemeral DH keys destroyed from RAM.',
+      state: 'Bidirectional encrypted data channel active. Protected against future quantum "Harvest Now, Decrypt Later" recording.'
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     }
   ],
 
@@ -96,10 +121,18 @@ window.ProtocolLab = {
     }
   },
 
+<<<<<<< HEAD
+=======
+  // Signal Double Ratchet Simulation
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   advanceRatchet(triggerCompromise) {
     this.ratchetStep++;
     if (triggerCompromise) this.isCompromised = true;
 
+<<<<<<< HEAD
+=======
+    // Healing logic: after compromise, a new DH ratchet step heals the state
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     let healed = false;
     if (this.isCompromised && !triggerCompromise && this.ratchetStep > 2) {
       healed = true;
@@ -129,6 +162,7 @@ window.ProtocolLab = {
     el.innerHTML = `
       <div style="font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+<<<<<<< HEAD
           <span>Turn: <strong>#${round} (${sender} Sending)</strong></span>
           <span class="status-pill ${this.isCompromised ? 'status-compromised' : 'status-secure'}">
             ${this.isCompromised ? '&times; DEVICE RAM COMPROMISED' : '&#10003; SECURE CHANNEL'}
@@ -144,6 +178,23 @@ window.ProtocolLab = {
             (healed ?
               `<strong style="color: var(--accent-emerald);">&#10003; Post-Compromise Healing Complete:</strong> A fresh DH Ratchet exchange occurred. Fresh uncompromised entropy was mixed into the Root Key, locking the adversary out of future messages.` :
               `<strong>Properties:</strong> Symmetric KDF advances per message (Forward Secrecy). Asymmetric DH ratchet advances per reply (Future Secrecy).`
+=======
+          <span>Ratchet Turn: <strong>#${round} (${sender} Sending)</strong></span>
+          <span class="status-pill ${this.isCompromised ? 'status-compromised' : 'status-secure'}">
+            ${this.isCompromised ? '&times; ADVERSARY HAS PHONE RAM ACCESS' : '&#10003; SECURE CHANNEL'}
+          </span>
+        </div>
+        Root Key (KDF): <code>${rootKey}</code><br>
+        Sending Chain Key: <code>${chainKey}</code><br>
+        Message Key Derived: <code>${msgKey}</code> (Deleted immediately after encryption!)<br>
+        Diffie-Hellman Ratchet: <code>${dhEphemeral}</code><br><br>
+        <div style="padding: 8px; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); font-size: 0.75rem;">
+          ${this.isCompromised ?
+            `<strong style="color: var(--accent-crimson);">Device Compromised:</strong> Attacker extracted current state. But attacker CANNOT decrypt past messages (Forward Secrecy - past keys were wiped!). Click "Send Next Message" to watch the DH Ratchet self-heal!` :
+            (healed ?
+              `<strong style="color: var(--accent-emerald);">&#10003; Post-Compromise Healing Completed:</strong> Alice & Bob performed a new DH Ratchet exchange. Fresh uncompromised entropy was mixed into the Root Key, locking the adversary out of all future messages!` :
+              `<strong>Properties Active:</strong> Every message advances the symmetric KDF chain. Every reply advances the asymmetric DH ratchet. Combining both guarantees Forward Secrecy and Future Secrecy (PCS).`
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
             )
           }
         </div>
@@ -151,6 +202,10 @@ window.ProtocolLab = {
     `;
   },
 
+<<<<<<< HEAD
+=======
+  // Merkle Tree Simulator
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   mockHash(val) {
     let h = 0x811c9dc5;
     for (let i = 0; i < val.length; i++) h = (h ^ val.charCodeAt(i)) * 0x01000193;
@@ -200,7 +255,11 @@ window.ProtocolLab = {
         1. Leaf Hash: <code>H${leafIdx+1} = 0x${this['h'+(leafIdx+1)]}</code><br>
         2. Sibling Hash 1: <code>${proofSibling1}</code><br>
         3. Sibling Hash 2: <code>${proofSibling2}</code><br><br>
+<<<<<<< HEAD
         <em>Verification requires only 2 intermediate hashes (log<sub>2</sub>(4) = 2) without downloading the full transaction ledger.</em>
+=======
+        <em>Verification: Verifier hashes upwards with only 2 intermediate hashes (log<sub>2</sub>(4) = 2). Does not require downloading the rest of the blockchain!</em>
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       </div>
     `;
   }

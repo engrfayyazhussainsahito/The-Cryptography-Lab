@@ -1,6 +1,10 @@
 /**
  * CRYPTIX // Historical & Classical Cipher Lab
+<<<<<<< HEAD
  * Implements Caesar, Atbash, Vigenère, Playfair, Hill (2x2), Enigma (3-rotor), and OTP Key Reuse.
+=======
+ * Implements Caesar, Atbash, Vigenere, Playfair, Hill (2x2), Enigma (3-rotor), and OTP Key Reuse.
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
  */
 
 window.HistoricalLab = {
@@ -8,7 +12,10 @@ window.HistoricalLab = {
 
   init() {
     this.bindEvents();
+<<<<<<< HEAD
     this.renderCipherControls();
+=======
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     this.update();
   },
 
@@ -39,25 +46,42 @@ window.HistoricalLab = {
           <input type="range" id="caesar-shift" min="0" max="25" value="3" class="crypto-slider">
         </div>
       `;
+<<<<<<< HEAD
       document.getElementById('caesar-shift')?.addEventListener('input', (e) => {
         const valEl = document.getElementById('caesar-shift-val');
         if (valEl) valEl.textContent = e.target.value;
+=======
+      document.getElementById('caesar-shift').addEventListener('input', (e) => {
+        document.getElementById('caesar-shift-val').textContent = e.target.value;
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
         this.update();
       });
     } else if (this.currentCipher === 'atbash') {
       controlsContainer.innerHTML = `
         <div class="math-box" style="margin: 0.25rem 0; font-size: 0.8rem;">
+<<<<<<< HEAD
           Affine substitution mapping letter index $x$ to $25 - x$. Fixed alphabet reversal: A &harr; Z, B &harr; Y.
+=======
+          Affine substitution where letter $x$ maps to $25 - x$. Fixed alphabet reversal: A &harr; Z, B &harr; Y.
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
         </div>
       `;
     } else if (this.currentCipher === 'vigenere') {
       controlsContainer.innerHTML = `
         <div class="control-group">
+<<<<<<< HEAD
           <label class="control-label">Passphrase / Keyword</label>
           <input type="text" id="vigenere-key" value="CIPHER" class="crypto-input" placeholder="e.g. CIPHER">
         </div>
       `;
       document.getElementById('vigenere-key')?.addEventListener('input', () => this.update());
+=======
+          <label class="control-label">Passphrase / Key Word</label>
+          <input type="text" id="vigenere-key" value="CIPHER" class="crypto-input" placeholder="e.g. CIPHER">
+        </div>
+      `;
+      document.getElementById('vigenere-key').addEventListener('input', () => this.update());
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     } else if (this.currentCipher === 'playfair') {
       controlsContainer.innerHTML = `
         <div class="control-group">
@@ -66,7 +90,11 @@ window.HistoricalLab = {
           <div id="playfair-grid-preview" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-top: 8px;"></div>
         </div>
       `;
+<<<<<<< HEAD
       document.getElementById('playfair-key')?.addEventListener('input', () => this.update());
+=======
+      document.getElementById('playfair-key').addEventListener('input', () => this.update());
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     } else if (this.currentCipher === 'hill') {
       controlsContainer.innerHTML = `
         <div class="control-group">
@@ -81,7 +109,11 @@ window.HistoricalLab = {
         </div>
       `;
       ['hill-a', 'hill-b', 'hill-c', 'hill-d'].forEach(id => {
+<<<<<<< HEAD
         document.getElementById(id)?.addEventListener('input', () => this.update());
+=======
+        document.getElementById(id).addEventListener('input', () => this.update());
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       });
     } else if (this.currentCipher === 'enigma') {
       controlsContainer.innerHTML = `
@@ -126,12 +158,17 @@ window.HistoricalLab = {
           </div>
         </div>
       `;
+<<<<<<< HEAD
       document.getElementById('otp-m2')?.addEventListener('input', () => this.update());
+=======
+      document.getElementById('otp-m2').addEventListener('input', () => this.update());
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     }
   },
 
   bindEnigmaRotorButtons() {
     const updateWindows = () => {
+<<<<<<< HEAD
       const w1 = document.getElementById('r1-win');
       const w2 = document.getElementById('r2-win');
       const w3 = document.getElementById('r3-win');
@@ -156,6 +193,21 @@ window.HistoricalLab = {
     if (r3Dn) r3Dn.onclick = () => { this.enigmaState.r3 = (this.enigmaState.r3 + 25) % 26; updateWindows(); };
 
     document.getElementById('enigma-plugboard')?.addEventListener('input', () => this.update());
+=======
+      document.getElementById('r1-win').textContent = String.fromCharCode(65 + this.enigmaState.r1);
+      document.getElementById('r2-win').textContent = String.fromCharCode(65 + this.enigmaState.r2);
+      document.getElementById('r3-win').textContent = String.fromCharCode(65 + this.enigmaState.r3);
+      this.update();
+    };
+
+    document.getElementById('r1-up').onclick = () => { this.enigmaState.r1 = (this.enigmaState.r1 + 1) % 26; updateWindows(); };
+    document.getElementById('r1-dn').onclick = () => { this.enigmaState.r1 = (this.enigmaState.r1 + 25) % 26; updateWindows(); };
+    document.getElementById('r2-up').onclick = () => { this.enigmaState.r2 = (this.enigmaState.r2 + 1) % 26; updateWindows(); };
+    document.getElementById('r2-dn').onclick = () => { this.enigmaState.r2 = (this.enigmaState.r2 + 25) % 26; updateWindows(); };
+    document.getElementById('r3-up').onclick = () => { this.enigmaState.r3 = (this.enigmaState.r3 + 1) % 26; updateWindows(); };
+    document.getElementById('r3-dn').onclick = () => { this.enigmaState.r3 = (this.enigmaState.r3 + 25) % 26; updateWindows(); };
+    document.getElementById('enigma-plugboard').addEventListener('input', () => this.update());
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   },
 
   update() {
@@ -241,6 +293,10 @@ window.HistoricalLab = {
       grid.push(matrixStr.slice(r * 5, (r + 1) * 5).split(''));
     }
 
+<<<<<<< HEAD
+=======
+    // Clean text and prepare digraphs
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     let cleaned = text.toUpperCase().replace(/[^A-Z]/g, '').replace(/J/g, 'I');
     let digraphs = [];
     for (let i = 0; i < cleaned.length; i++) {
@@ -269,11 +325,19 @@ window.HistoricalLab = {
     for (let [c1, c2] of digraphs) {
       let p1 = findPos(c1);
       let p2 = findPos(c2);
+<<<<<<< HEAD
       if (p1.r === p2.r) {
         encrypted += grid[p1.r][(p1.col + 1) % 5] + grid[p2.r][(p2.col + 1) % 5];
       } else if (p1.col === p2.col) {
         encrypted += grid[(p1.r + 1) % 5][p1.col] + grid[(p2.r + 1) % 5][p2.col];
       } else {
+=======
+      if (p1.r === p2.r) { // Same row
+        encrypted += grid[p1.r][(p1.col + 1) % 5] + grid[p2.r][(p2.col + 1) % 5];
+      } else if (p1.col === p2.col) { // Same col
+        encrypted += grid[(p1.r + 1) % 5][p1.col] + grid[(p2.r + 1) % 5][p2.col];
+      } else { // Rectangle
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
         encrypted += grid[p1.r][p2.col] + grid[p2.r][p1.col];
       }
     }
@@ -309,6 +373,10 @@ window.HistoricalLab = {
       };
     }
 
+<<<<<<< HEAD
+=======
+    // Extended Euclidean to find det inverse
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     let detInv = -1;
     for (let i = 1; i < 26; i++) {
       if ((det * i) % 26 === 1) {
@@ -336,14 +404,25 @@ window.HistoricalLab = {
   },
 
   runEnigma(text, initRotor, plugboardStr) {
+<<<<<<< HEAD
+=======
+    // Historical wirings
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const ROTOR_I   = 'EKMFLGDQVZNTOWYHXUSPAIBRCJ';
     const ROTOR_II  = 'AJDKSIRUXBLHWTMCQGZNPYFVOE';
     const ROTOR_III = 'BDFHJLCPRTXVZNYEIWGAKMUSQO';
     const REFLECTOR_B = 'YRUHQSLDPXNGOKMIEBFZCWVJAT';
 
+<<<<<<< HEAD
     const r3Notch = 21; // V
     const r2Notch = 4;  // E
 
+=======
+    const r3Notch = 21; // V (steps R2)
+    const r2Notch = 4;  // E (steps R1)
+
+    // Build plugboard map
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const plugMap = {};
     for (let i = 0; i < 26; i++) plugMap[i] = i;
     const pairs = plugboardStr.toUpperCase().match(/[A-Z]{2}/g) || [];
@@ -375,6 +454,10 @@ window.HistoricalLab = {
     };
 
     for (let i = 0; i < cleaned.length; i++) {
+<<<<<<< HEAD
+=======
+      // Rotor stepping mechanism (double stepping of middle rotor)
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       if (r2 === r2Notch) {
         r1 = (r1 + 1) % 26;
         r2 = (r2 + 1) % 26;
@@ -384,6 +467,7 @@ window.HistoricalLab = {
       r3 = (r3 + 1) % 26;
 
       let c = cleaned.charCodeAt(i) - 65;
+<<<<<<< HEAD
       c = plugMap[c];
       c = forward(c, ROTOR_III, r3);
       c = forward(c, ROTOR_II, r2);
@@ -392,6 +476,21 @@ window.HistoricalLab = {
       c = reverse(c, ROTOR_I, r1);
       c = reverse(c, ROTOR_II, r2);
       c = reverse(c, ROTOR_III, r3);
+=======
+      // 1. Plugboard in
+      c = plugMap[c];
+      // 2. Rotors forward (R3 -> R2 -> R1)
+      c = forward(c, ROTOR_III, r3);
+      c = forward(c, ROTOR_II, r2);
+      c = forward(c, ROTOR_I, r1);
+      // 3. Reflector B
+      c = REFLECTOR_B.charCodeAt(c) - 65;
+      // 4. Rotors reverse (R1 -> R2 -> R3)
+      c = reverse(c, ROTOR_I, r1);
+      c = reverse(c, ROTOR_II, r2);
+      c = reverse(c, ROTOR_III, r3);
+      // 5. Plugboard out
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       c = plugMap[c];
 
       ciphertext += String.fromCharCode(65 + c);
@@ -408,6 +507,10 @@ window.HistoricalLab = {
     const b2 = toBytes(m2);
     const maxLen = Math.max(b1.length, b2.length);
 
+<<<<<<< HEAD
+=======
+    // Deterministic pseudo-key simulation
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const key = [];
     for (let i = 0; i < maxLen; i++) {
       key.push((i * 47 + 101) % 256);
@@ -416,10 +519,20 @@ window.HistoricalLab = {
     const c1 = b1.map((b, i) => b ^ key[i]);
     const c2 = b2.map((b, i) => b ^ key[i]);
 
+<<<<<<< HEAD
     const minLen = Math.min(b1.length, b2.length);
     let xorAscii = '';
     for (let i = 0; i < minLen; i++) {
       const diff = c1[i] ^ c2[i];
+=======
+    // Attack: C1 XOR C2 = M1 XOR M2
+    const minLen = Math.min(b1.length, b2.length);
+    const xorStream = [];
+    let xorAscii = '';
+    for (let i = 0; i < minLen; i++) {
+      const diff = c1[i] ^ c2[i];
+      xorStream.push(diff);
+>>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       xorAscii += (diff >= 32 && diff <= 126) ? String.fromCharCode(diff) : '.';
     }
 
