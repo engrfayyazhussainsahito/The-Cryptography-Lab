@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CRYPTIX // The Definitive Modern & Post-Quantum Cryptography Masterwork
 
 An elite, interactive cybersecurity educational platform spanning the complete continuum of cryptography: from ancient classical ciphers and electromechanical rotor machines to modern symmetric systems, AEAD, cryptographic hash trees, password defense, classical public-key, **NIST Post-Quantum Cryptography standards (FIPS 203, 204, 205, 206)**, Quantum Key Distribution (QKD), Zero-Knowledge Proofs, Homomorphic Encryption (FHE), and real-world secure protocols (TLS 1.3, Signal Double Ratchet, WireGuard).
@@ -119,3 +120,7 @@ You can open the project locally anytime:
 ## 🛡️ License & Educational Disclaimer
 
 This project is open-source educational software designed for cybersecurity students, researchers, and cryptographic software engineers. Toy key generators and educational simulators in the laboratories are intended strictly for educational and conceptual demonstration purposes. Production applications must utilize audited, constant-time cryptographic implementations (e.g. OpenSSL 3.4+, BoringSSL, libsodium, or liboqs).
+=======
+# The-Cryptography-Lab
+Learn cryptography by understanding, building, and breaking.
+>>>>>>> d632fa313644510c944b006792d0e4887ff93bdb
