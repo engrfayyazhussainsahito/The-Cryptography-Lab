@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRYPTIX // The Masterwork of Modern & Post-Quantum Cryptography</title>
+  <meta name="description" content="An elite, interactive cybersecurity educational platform spanning Classical Ciphers, Symmetric Systems, AEAD, Cryptographic Hashes, KDF/PAKE, Public-Key, Post-Quantum Cryptography (FIPS 203/204/205), Quantum Cryptography (QKD), ZKPs, FHE, and Modern Security Protocols.">
+
+  <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- KaTeX for crisp mathematical formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Main Stylesheet & Interactive Lab Styling -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/labs.css">
+</head>
+<body>
+  <!-- Custom Interactive Cursor Follower -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- Background Interactive Cryptographic Lattice & Particle Mesh Canvas -->
+  <canvas id="lattice-canvas"></canvas>
+
+  <div class="app-container">
+    <!-- Glassmorphic Header Navigation -->
+    <header class="header-nav">
+      <div class="nav-inner">
+        <a href="#" class="brand-wrapper">
+          <div class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <h1>CRYPTIX <span class="brand-badge">PQC &middot; CYBERSECURITY</span></h1>
+          </div>
+        </a>
+
+        <div class="nav-actions">
+          <div class="search-trigger" id="btn-open-search" title="Search all 12 domains (Ctrl+K)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Search 100+ Ciphers & Algorithms</span>
+            <span class="kbd-shortcut">&CtrlKey; K</span>
+          </div>
+
+          <button class="btn-icon" id="btn-sound-toggle" title="Toggle Synthesized Audio Feedback">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+
+          <button class="btn-primary" id="btn-open-deploy">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span>Deploy to GitHub Pages</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sticky Topic Navigation Pill Rail -->
+    <nav class="topic-pills-container">
+      <div class="topic-pills-scroll">
+        <a href="#section-1-classical" class="topic-pill active"><span class="pill-idx">01</span> Classical Ciphers</a>
+        <a href="#section-2-symmetric" class="topic-pill"><span class="pill-idx">02</span> Symmetric Encryption</a>
+        <a href="#section-3-aead" class="topic-pill"><span class="pill-idx">03</span> AEAD & MACs</a>
+        <a href="#section-4-hash" class="topic-pill"><span class="pill-idx">04</span> Hash Functions & ZK</a>
+        <a href="#section-5-kdf" class="topic-pill"><span class="pill-idx">05</span> KDF & PAKE</a>
+        <a href="#section-6-publickey" class="topic-pill"><span class="pill-idx">06</span> Classical Public-Key</a>
+        <a href="#section-7-pqc" class="topic-pill"><span class="pill-idx">07</span> Post-Quantum (FIPS)</a>
+        <a href="#section-8-quantum" class="topic-pill"><span class="pill-idx">08</span> Quantum Proper & QKD</a>
+        <a href="#section-9-advanced" class="topic-pill"><span class="pill-idx">09</span> ZKPs, FHE & MPC</a>
+        <a href="#section-10-protocols" class="topic-pill"><span class="pill-idx">10</span> Security Protocols</a>
+        <a href="#section-11-lightweight" class="topic-pill"><span class="pill-idx">11</span> Lightweight IoT</a>
+        <a href="#section-12-frontier" class="topic-pill"><span class="pill-idx">12</span> 2026+ Threat Radar</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section: Jesper Landberg Editorial Vibe -->
+    <section class="hero-section">
+      <div class="hero-editorial-label">
+        <span class="pulse-dot"></span>
+        <span>DEFENSIVE CRYPTOGRAPHY // CYBERSECURITY ARCHITECTURE</span>
+      </div>
+
+      <h2 class="hero-headline">
+        Master Cryptography from <span class="italic-serif">Historical Rotors</span> to <span class="gradient-text">Post-Quantum Lattice FIPS Standards</span>.
+      </h2>
+
+      <p class="hero-description">
+        The definitive, university-grade cybersecurity cryptographic reference and interactive simulation laboratory. Explore mathematical trapdoors, cryptanalysis attack vectors, quantum threats, and hands-on algorithm workbenches built for security researchers, cryptanalysts, and engineers.
+      </p>
+
+      <div class="hero-stats-ribbon">
+        <div class="stat-chip">
+          <div class="stat-num">12 <span>Domains</span></div>
+          <div class="stat-label">Full Cryptographic Hierarchy</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-num">100+ <span>Primitives</span></div>
+          <div class="stat-label">From Caesar to ML-KEM-768</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-num">12 <span>Interactive Labs</span></div>
+          <div class="stat-label">Live Hands-on Calculators</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-num">FIPS <span>203/204/205</span></div>
+          <div class="stat-label">NIST Standards & 2026 Roadmaps</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Container with all 12 In-Depth Modules & Interactive Labs -->
+    <main class="main-content">
+
+      <!-- =========================================================================
+           TOPIC 1: CLASSICAL / HISTORICAL CIPHERS
+           ========================================================================= -->
+      <section id="section-1-classical" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-classical">Domain 01 // Foundations</span>
+            <span class="section-security-level">Security: 0-bit Classical (Cryptographically Broken)</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">01.</span> Classical & Historical Ciphers</h3>
+          <p class="section-lead">
+            The foundation of cryptology began with pen-and-paper transposition and substitution, evolving into electromechanical rotor machinery. While completely insecure against modern computational cryptanalysis, these systems introduced essential concepts: substitution-permutation, diffusion, key space, and Claude Shannon's theorem of Perfect Secrecy.
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <!-- Theory Deep-Dive -->
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                Monoalphabetic & Polyalphabetic Substitution
+              </h4>
+              <p>
+                <strong>Caesar Cipher:</strong> A monoalphabetic shift cipher mapping each character $p$ to $c \equiv (p + k) \pmod{26}$. With a trivial key space of $|\mathcal{K}| = 26$, it can be broken in microseconds via brute force or by comparing the unigram frequency distribution against standard language letter frequencies (e.g. 'E' at 12.7%, 'T' at 9.1%).
+              </p>
+              <p>
+                <strong>Atbash Cipher:</strong> A biblical Hebrew reciprocal cipher mapping letter index $x$ to $25 - x$. Because it requires no secret key, it provides zero confidentiality under Kerckhoffs's principle.
+              </p>
+              <p>
+                <strong>Vigenère Cipher:</strong> A polyalphabetic substitution cipher employing a keyword to shift letters according to a tabula recta: $c_i \equiv (p_i + k_{i \pmod L}) \pmod{26}$. Although long considered <em>le chiffre indéchiffrable</em>, it is broken via:
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.75rem;">
+                <li><strong>Kasiski Examination:</strong> Measuring the greatest common divisor (GCD) of distances between repeated ciphertext trigrams to deduce keyword length $L$.</li>
+                <li><strong>Index of Coincidence (Friedman test):</strong> Computing $IC = \sum \frac{f_i(f_i - 1)}{N(N - 1)}$; English plaintext exhibits $IC \approx 0.0667$, while uniform random ciphertext exhibits $IC \approx 0.0385$.</li>
+              </ul>
+              <p>
+                <strong>Playfair Cipher:</strong> The first practical digraph substitution cipher, mapping pairs of letters onto a 5x5 Polybius square (combining 'I' and 'J'). While it flattens the single-letter frequency distribution, it remains vulnerable to bigram frequency cryptanalysis.
+              </p>
+              <p>
+                <strong>Hill Cipher:</strong> The first block cipher utilizing linear algebra over $\mathbb{Z}_{26}$. Plaintext vectors $\mathbf{p} = (p_1, p_2)^T$ are multiplied by an invertible $2 \times 2$ matrix $\mathbf{K}$:
+              </p>
+              <div class="math-box">
+                $$\mathbf{c} \equiv \mathbf{K} \cdot \mathbf{p} \pmod{26}, \quad \text{where } \gcd(\det(\mathbf{K}), 26) = 1$$
+              </div>
+              <div class="vuln-box">
+                <div class="vuln-box-title">Cryptanalytic Vulnerability // Known-Plaintext Attack (KPA)</div>
+                <p>Because the Hill cipher is entirely linear, an adversary who intercepts two plaintext-ciphertext digraph pairs can form $\mathbf{C} = \mathbf{K} \cdot \mathbf{P} \pmod{26}$ and invert the matrix $\mathbf{K} = \mathbf{C} \cdot \mathbf{P}^{-1} \pmod{26}$ in constant time, entirely recovering the secret key!</p>
+              </div>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Electromechanical Rotor Machines: Enigma & Lorenz SZ42
+              </h4>
+              <p>
+                During WWII, mechanical polyalphabetic rotor machines drastically expanded the period before the substitution pattern repeated. The German <strong>Enigma</strong> utilized 3 wired rotors, an interchangeable reflector (<em>Umkehrwalze</em>), and a plugboard (<em>Steckerbrett</em>). The rotors stepped cyclically with every keystroke, yielding an effective key space of over $1.5 \times 10^{20}$ states.
+              </p>
+              <p>
+                <strong>The Fatal Enigma Flaw:</strong> The reflector routed electrical current back through the rotors, meaning <em>a letter could never encrypt to itself ($E(x) \ne x$)</em>. Polish mathematician Marian Rejewski and Alan Turing at Bletchley Park exploited this mathematical defect inside electromechanical "Bombes" to eliminate millions of false rotor configurations simultaneously.
+              </p>
+              <p>
+                <strong>Lorenz SZ42:</strong> A 12-wheel Vernam teleprinter stream cipher used by the German High Command for strategic communications. Cracked without seeing the machine by Bill Tutte through finding statistical pseudo-random biases across the $\psi$ and $\chi$ wheels, leading to the construction of <strong>Colossus</strong>, the world's first programmable electronic digital computer.
+              </p>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                The One-Time Pad (OTP) & Shannon's Perfect Secrecy
+              </h4>
+              <p>
+                In 1949, Claude Shannon published <em>Communication Theory of Secrecy Systems</em>, proving that the One-Time Pad (Vernam cipher) is the <strong>only provably unbreakable cipher in existence</strong>.
+              </p>
+              <div class="math-box">
+                $$c_i = m_i \oplus k_i, \quad \text{where } H(M \mid C) = H(M)$$
+              </div>
+              <p>
+                For perfect secrecy, three conditions are mathematically required:
+              </p>
+              <ol style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                <li>The key $k$ must be generated from a true physical source of non-deterministic entropy (QRNG/radioactive decay).</li>
+                <li>The key must be as long as or longer than the message ($|K| \ge |M|$).</li>
+                <li><strong>The key must NEVER be reused or even partially overlapped.</strong></li>
+              </ol>
+              <div class="vuln-box">
+                <div class="vuln-box-title">Cryptanalytic Catastrophe // Two-Time Pad Attack ($C_1 \oplus C_2$)</div>
+                <p>If an identical key $K$ is ever used to encrypt two distinct messages $M_1$ and $M_2$, an eavesdropper computes:
+                $$C_1 \oplus C_2 = (M_1 \oplus K) \oplus (M_2 \oplus K) = M_1 \oplus M_2$$
+                The key is completely eliminated! Through "crib-dragging" (sliding common English words through the XOR difference), both messages are trivially reconstructed. This fatal error exposed thousands of Soviet cables during the Cold War in the famous <strong>Venona project</strong>.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Historical Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Historical Cipher Workbench</div>
+                  <div class="lab-subtitle">Caesar &middot; Atbash &middot; Vigenère &middot; Playfair &middot; Hill &middot; Enigma &middot; OTP</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div class="control-group">
+                <label class="control-label">Select Cipher Engine</label>
+                <select id="hist-cipher-select" class="crypto-select">
+                  <option value="caesar">Caesar Shift Cipher (O(26) Brute Force)</option>
+                  <option value="atbash">Atbash Reciprocal Cipher (Keyless)</option>
+                  <option value="vigenere">Vigenère Polyalphabetic Cipher</option>
+                  <option value="playfair">Playfair 5x5 Digraph Cipher</option>
+                  <option value="hill">Hill 2x2 Modular Matrix Cipher</option>
+                  <option value="enigma">Enigma I Rotor Machine (Wehrmacht Model)</option>
+                  <option value="otp">One-Time Pad & Two-Time Pad Key Reuse Attack</option>
+                </select>
+              </div>
+
+              <div id="hist-specific-controls">
+                <!-- Dynamically rendered by historical-lab.js -->
+              </div>
+
+              <div class="control-group">
+                <label class="control-label">Plaintext Input</label>
+                <textarea id="hist-input" class="crypto-textarea" placeholder="Type plaintext message...">ATTACK AT DAWN</textarea>
+              </div>
+
+              <div class="output-box">
+                <div class="output-header">
+                  <span class="output-title">Ciphertext Output</span>
+                  <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('hist-output').textContent)">Copy</button>
+                </div>
+                <div id="hist-output" class="output-content">DWWDFN DW GDZQ</div>
+              </div>
+
+              <div id="hist-details" class="output-box" style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
+                <!-- Cryptanalysis note -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 2: SYMMETRIC ENCRYPTION (BLOCK, STREAM, MODES, FPE)
+           ========================================================================= -->
+      <section id="section-2-symmetric" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-symmetric">Domain 02 // Workhorse</span>
+            <span class="section-security-level">Security: 128 to 256-bit Classical // Grover 128-bit Post-Quantum</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">02.</span> Symmetric Encryption: Block, Stream & Modes</h3>
+          <p class="section-lead">
+            Symmetric cryptography uses a shared secret key for both encryption and decryption. It is divided into Block Ciphers operating on fixed-size blocks (e.g. 128 bits) via Substitution-Permutation Networks (SPN) or Feistel networks, and Stream Ciphers generating continuous pseudorandom keystreams. Mode selection dictates confidentiality, semantic security, and resilience to pattern leakage.
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Block Ciphers: Architectures & Standards
+              </h4>
+              <p>
+                <strong>DES & 3DES:</strong> Designed by IBM/NSA in 1977, the Data Encryption Standard (DES) is a 16-round Feistel network with a 64-bit block size. Its 56-bit effective key space ($2^{56} \approx 7.2 \times 10^{16}$ possibilities) was broken in 1998 by the EFF Deep Crack machine in 56 hours. Double-DES ($2\text{DES}$) failed due to the <em>Meet-in-the-Middle (MitM) attack</em>, which reduces the effective security from $2^{112}$ down to $2^{57}$ operations using $2^{56}$ memory blocks. Triple-DES ($3\text{DES}$, $E_{K3}(D_{K2}(E_{K1}(P)))$) offered 112 or 168-bit security, but its 64-bit block size makes it vulnerable to birthday collision attacks (<strong>Sweet32</strong>, CVE-2016-2183) after $2^{32}$ blocks ($\approx 32\text{ GB}$).
+              </p>
+              <p>
+                <strong>AES (Advanced Encryption Standard / Rijndael, FIPS 197):</strong> Selected by NIST in 2001, AES is a Substitution-Permutation Network (SPN) operating on a 128-bit state matrix ($4 \times 4$ bytes) with key sizes of 128 bits (10 rounds), 192 bits (12 rounds), or 256 bits (14 rounds). Each round consists of four transformations:
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>SubBytes:</strong> Non-linear byte substitution using the Rijndael S-box, derived from multiplicative inversion in $GF(2^8)$ followed by an affine transformation.</li>
+                <li><strong>ShiftRows:</strong> Cyclical left byte shifts by offsets $[0, 1, 2, 3]$ to diffuse data across columns.</li>
+                <li><strong>MixColumns:</strong> Matrix multiplication over the Galois Field $GF(2^8)$ modulo irreducible polynomial $x^8 + x^4 + x^3 + x + 1$ (0x11B) ensuring maximum diffusion.</li>
+                <li><strong>AddRoundKey:</strong> Bitwise XOR of the state with the round subkey.</li>
+              </ul>
+              <div class="subtopic-cards">
+                <div class="subtopic-card">
+                  <div class="subtopic-title">Twofish & Serpent <span class="standard-badge">AES Finalists</span></div>
+                  <div class="subtopic-desc">Twofish (Bruce Schneier) uses key-dependent S-boxes. Serpent (Anderson, Biham, Knudsen) was the most conservative design, using 32 rounds of 4-bit S-boxes with maximum security margins.</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">Camellia & IDEA <span class="standard-badge">ISO / OpenSSL</span></div>
+                  <div class="subtopic-desc">Camellia (Mitsubishi/NTT) is an international standard equivalent in strength to AES. IDEA (128-bit key, 8 rounds) mixes operations from three incompatible algebraic groups (XOR, + mod 2^16, * mod 2^16 + 1).</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">SM4 & Kuznyechik <span class="standard-badge">National Standards</span></div>
+                  <div class="subtopic-desc">SM4 is China's official 128-bit block cipher standard (GB/T 32907-2016). Kuznyechik (GOST R 34.12-2015) is Russia's 128-bit SPN block cipher replacing GOST 28147-89.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                Stream Ciphers: ARX & Hardware Standards
+              </h4>
+              <p>
+                <strong>RC4 (Rivest Cipher 4):</strong> A 1987 byte-oriented stream cipher with an internal state of a 256-byte permutation array $S$. Completely broken due to keystream biases in the initial bytes (Fluhrer-Mantin-Shamir FMS attack), destroying WEP Wi-Fi encryption and banned in TLS (RFC 7465).
+              </p>
+              <p>
+                <strong>Salsa20 & ChaCha20 (RFC 8439):</strong> Designed by Daniel J. Bernstein (djb). ChaCha20 uses an Add-Rotate-Xor (ARX) engine operating on a $4 \times 4$ matrix of 32-bit words (512-bit state: 128-bit constant, 256-bit key, 32-bit counter, 96-bit nonce). Performs 20 rounds of quarter-round operations. Unlike AES, ChaCha20 has no lookup tables, providing <strong>complete immunity to cache-timing side-channel attacks</strong> without requiring hardware AES-NI instructions.
+              </p>
+              <p>
+                <strong>Hardware Stream Ciphers:</strong> <em>Trivium</em> (shift-register design with only 288-bit state), <em>Grain-128a</em> (LFSR + NFSR for RFID/IoT), and <em>SNOW 3G / SNOW 5G</em> (3GPP cellular encryption standards).
+              </p>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Cipher Operational Modes & The "ECB Penguin"
+              </h4>
+              <p>
+                A raw block cipher only encrypts a single 16-byte block. Modes of operation determine how arbitrary-length data is processed:
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>ECB (Electronic Codebook):</strong> Encrypts each 16-byte block independently ($C_i = E_K(P_i)$). <strong>Catastrophically insecure:</strong> identical plaintext blocks produce identical ciphertext blocks, fully preserving structural patterns (e.g. the famous Linux Tux penguin image).</li>
+                <li><strong>CBC (Cipher Block Chaining):</strong> XORs each plaintext block with the preceding ciphertext block ($C_i = E_K(P_i \oplus C_{i-1})$) using a random Initial Vector ($IV$). Vulnerable to <em>Padding Oracle Attacks</em> (Vaudenay) when used without integrity authentication.</li>
+                <li><strong>CTR (Counter Mode):</strong> Converts a block cipher into a stream cipher by encrypting $(Nonce \parallel Counter)$ and XORing with plaintext ($C_i = P_i \oplus E_K(Nonce \parallel i)$). Highly parallelizable in SIMD; however, reusing a Nonce completely breaks confidentiality ($C_A \oplus C_B = P_A \oplus P_B$).</li>
+                <li><strong>XTS (IEEE 1619):</strong> XEX-based Tweakable block cipher mode designed for disk and block device encryption (BitLocker, VeraCrypt, LUKS), incorporating sector logical block addresses ($LBA$) to prevent block relocation attacks.</li>
+                <li><strong>Format-Preserving Encryption (FF1 & FF3-1, NIST SP 800-38G):</strong> Encrypts structured data (e.g. 16-digit credit card numbers, SSNs) such that the ciphertext output preserves the exact length, characters, and check digits of the input, enabling database encryption without schema migrations.</li>
+                <li><strong>Adiantum & HCTR2:</strong> Wide-block tweakable modes designed by Google to protect disk storage on low-powered Android smartphones lacking hardware cryptographic engines.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Interactive Symmetric Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Symmetric Cipher Laboratory</div>
+                  <div class="lab-subtitle">AES 4x4 &middot; ECB Leaks &middot; ChaCha20 ARX &middot; FF1 FPE</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div class="segmented-pills">
+                <button class="segmented-pill sym-tab-btn active" data-tab="aes">AES State Matrix</button>
+                <button class="segmented-pill sym-tab-btn" data-tab="modes">ECB vs CBC Leak</button>
+                <button class="segmented-pill sym-tab-btn" data-tab="chacha">ChaCha20 ARX</button>
+                <button class="segmented-pill sym-tab-btn" data-tab="fpe">FF1 FPE</button>
+              </div>
+
+              <!-- VIEW 1: AES State Matrix -->
+              <div id="sym-view-aes">
+                <div class="control-label" style="margin-bottom: 6px;">128-Bit Rijndael State Matrix (16 Bytes, Column-Major)</div>
+                <div id="aes-state-grid" class="state-matrix-4x4" style="margin-bottom: 12px;"></div>
+
+                <div class="input-row" style="margin-bottom: 8px;">
+                  <button class="lab-action-btn" id="aes-subbytes" style="padding: 0.5rem;">SubBytes</button>
+                  <button class="lab-action-btn" id="aes-shiftrows" style="padding: 0.5rem;">ShiftRows</button>
+                  <button class="lab-action-btn" id="aes-mixcolumns" style="padding: 0.5rem;">MixColumns</button>
+                  <button class="lab-action-btn" id="aes-addroundkey" style="padding: 0.5rem;">AddRoundKey</button>
+                </div>
+                <button class="btn-icon" id="aes-reset" style="width: 100%; border-radius: var(--radius-md); font-size: 0.75rem;">Reset Original 128-bit Plaintext State</button>
+
+                <div id="aes-status-msg" class="output-box" style="margin-top: 10px; font-size: 0.8rem; color: var(--text-secondary);">
+                  State initialized with standard test vector. Click buttons above to execute individual round transformations!
+                </div>
+              </div>
+
+              <!-- VIEW 2: Mode Leak (ECB Penguin) -->
+              <div id="sym-view-modes" style="display: none;">
+                <div class="control-group">
+                  <label class="control-label">Plaintext Stream (Notice repeating 16-byte blocks)</label>
+                  <input type="text" id="mode-text-input" class="crypto-input" value="CONFIDENTIAL DATA CONFIDENTIAL DATA CONFIDENTIAL DATA SECRETS">
+                </div>
+
+                <div style="margin-top: 10px;">
+                  <div class="control-label" style="color: var(--accent-crimson); font-weight: 700;">ECB Mode Output (Leaks Structural Pattern!)</div>
+                  <div id="ecb-blocks-preview" style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px;"></div>
+
+                  <div class="control-label" style="color: var(--accent-emerald); font-weight: 700;">CBC Mode Output (IV Diffused)</div>
+                  <div id="cbc-blocks-preview" style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px;"></div>
+
+                  <div class="control-label" style="color: var(--accent-cyan); font-weight: 700;">CTR Mode Output (Stream Keystream)</div>
+                  <div id="ctr-blocks-preview" style="display: flex; flex-direction: column; gap: 4px;"></div>
+                </div>
+              </div>
+
+              <!-- VIEW 3: ChaCha20 ARX Runner -->
+              <div id="sym-view-chacha" style="display: none;">
+                <div class="control-label" style="margin-bottom: 6px;">ChaCha20 4-Word State Column [a, b, c, d]</div>
+                <div class="input-row" style="margin-bottom: 8px;">
+                  <div class="subtopic-card" style="padding: 6px; text-align: center;"><small style="color: var(--text-dim);">Word a</small><div id="chacha-a" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">0x00000000</div></div>
+                  <div class="subtopic-card" style="padding: 6px; text-align: center;"><small style="color: var(--text-dim);">Word b</small><div id="chacha-b" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">0x00000000</div></div>
+                  <div class="subtopic-card" style="padding: 6px; text-align: center;"><small style="color: var(--text-dim);">Word c</small><div id="chacha-c" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">0x00000000</div></div>
+                  <div class="subtopic-card" style="padding: 6px; text-align: center;"><small style="color: var(--text-dim);">Word d</small><div id="chacha-d" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">0x00000000</div></div>
+                </div>
+                <button class="lab-action-btn" id="chacha-step-btn">Execute Next ARX Quarter-Round Action</button>
+                <div id="chacha-step-desc" class="output-box" style="margin-top: 10px; font-size: 0.78rem;">
+                  Click button to run Add-Rotate-Xor quarter round operations.
+                </div>
+              </div>
+
+              <!-- VIEW 4: Format-Preserving Encryption (FF1) -->
+              <div id="sym-view-fpe" style="display: none;">
+                <div class="control-group">
+                  <label class="control-label">Formatted Input (e.g. Credit Card 16 digits)</label>
+                  <input type="text" id="ff1-input" class="crypto-input" value="4532-8901-2345-6789">
+                </div>
+                <div class="output-box" style="margin-top: 10px;">
+                  <span class="output-title">FF1 Format-Preserved Ciphertext Output</span>
+                  <div id="ff1-output" class="output-content" style="color: var(--accent-emerald);">3918-4029-7182-9014</div>
+                  <small style="color: var(--text-muted); font-size: 0.72rem; margin-top: 4px;">Notice the exact structure, dash positions, and length are retained, satisfying PCI-DSS and database constraints without schema changes.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 3: AUTHENTICATED ENCRYPTION (AEAD) & MACs
+           ========================================================================= -->
+      <section id="section-3-aead" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-aead">Domain 03 // Authenticity</span>
+            <span class="section-security-level">Security: IND-CCA2 Authenticated (Tamper Proof)</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">03.</span> Authenticated Encryption (AEAD) & MACs</h3>
+          <p class="section-lead">
+            Encryption alone guarantees confidentiality, but <strong>zero integrity</strong>. Without cryptographic authentication, ciphertexts are malleable: an active man-in-the-middle can flip bits, reorder packets, and craft chosen-ciphertext attacks (CCA). Modern security mandates Authenticated Encryption with Associated Data (AEAD).
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                The Doom Principle & AEAD Paradigms
+              </h4>
+              <p>
+                In 2011, cryptographer Moxie Marlinspike formulated the <strong>Cryptographic Doom Principle</strong>:
+              </p>
+              <div class="math-box">
+                <em>"If you have to perform any cryptographic parsing or state-machine actions on input data prior to verifying its message authentication tag, you will inevitably fall to doom."</em>
+              </div>
+              <p>Historically, protocols experimented with three compositions:</p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>MAC-then-Encrypt (SSL 3.0 / TLS 1.0):</strong> Compute MAC on plaintext, append, then encrypt. Catastrophically broken by Lucky Thirteen and Vaudenay padding oracle attacks because the server decodes and parses padding before verifying the MAC.</li>
+                <li><strong>Encrypt-and-MAC (SSHv2):</strong> Compute MAC on plaintext and encrypt plaintext separately. Can leak information about whether two plaintexts are identical through identical MAC tags.</li>
+                <li><strong>Encrypt-then-MAC (EtM / Modern Standard):</strong> Encrypt plaintext, then compute MAC over $(Ciphertext \parallel AssociatedData)$. The recipient checks the MAC tag first in constant-time; if invalid, the entire payload is rejected with zero decryption performed!</li>
+              </ul>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Leading AEAD Algorithms & The Nonce-Reuse Trap
+              </h4>
+              <p>
+                <strong>AES-GCM (Galois/Counter Mode, NIST SP 800-38D):</strong> Combines CTR mode encryption with the GHASH authenticator, which evaluates a polynomial over the Galois field $GF(2^{128})$ using the authentication subkey $H = E_K(0^{128})$.
+              </p>
+              <div class="vuln-box">
+                <div class="vuln-box-title">Cryptanalytic Hazard // The AES-GCM Nonce Reuse Catastrophe</div>
+                <p>AES-GCM requires a 96-bit Nonce that must NEVER be repeated under the same key. If a Nonce is reused even once:
+                1. The keystream is exposed ($C_A \oplus C_B = P_A \oplus P_B$).
+                2. An attacker subtracts the authentication equations to solve for the GHASH key $H$, allowing them to forge valid authentication tags for arbitrary packets thereafter (The Joux Forbidden Attack)!</p>
+              </div>
+              <p>
+                <strong>ChaCha20-Poly1305 (RFC 8439):</strong> Combines ChaCha20 stream cipher with Daniel J. Bernstein's Poly1305 MAC, evaluating a polynomial modulo prime $2^{130} - 5$. Extremely fast on processors lacking hardware AES acceleration.
+              </p>
+              <p>
+                <strong>XChaCha20-Poly1305:</strong> Extends the Nonce length to <strong>192 bits</strong> using the HChaCha20 intermediate key derivation function. Because 192 bits allows $2^{96}$ random nonces before a 50% collision probability (due to the Birthday Paradox), developers can safely generate random nonces without tracking state counters!
+              </p>
+              <p>
+                <strong>Nonce-Misuse Resistant AEAD:</strong> <em>AES-GCM-SIV (RFC 8452)</em> and <em>Deoxys-II</em> (CAESAR portfolio winner for defense in depth) employ synthetic initialization vectors (SIV) where the nonce is derived deterministically from the plaintext, preserving authentication and privacy even when nonces are accidentally reused.
+              </p>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                Message Authentication Codes (MACs)
+              </h4>
+              <p>
+                <strong>HMAC (RFC 2104):</strong> Designed to avoid length-extension attacks:
+              </p>
+              <div class="math-box">
+                $$\text{HMAC}(K, M) = H\big((K \oplus opad) \parallel H((K \oplus ipad) \parallel M)\big)$$
+              </div>
+              <p>
+                <strong>CMAC (NIST SP 800-38B):</strong> Cipher-based MAC using block ciphers like AES instead of hash functions.
+              </p>
+              <p>
+                <strong>SipHash:</strong> Designed by Aumasson and Bernstein to protect Web application hash tables against Hash-Flooding Denial-of-Service attacks (where an attacker crafts colliding keys to force $O(N)$ hash bucket degradation). Used in Python, Rust, Ruby, and Linux kernel tables.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive AEAD Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">AEAD Integrity & Tamper Testing Workbench</div>
+                  <div class="lab-subtitle">AES-GCM &middot; ChaCha20-Poly1305 &middot; Bit Tampering</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div class="control-group">
+                <label class="control-label">AEAD Construction</label>
+                <select id="aead-algo" class="crypto-select">
+                  <option value="aes-gcm">AES-256-GCM (GHASH over GF(2^128))</option>
+                  <option value="chacha-poly">ChaCha20-Poly1305 (RFC 8439, Mod 2^130-5)</option>
+                  <option value="xchacha">XChaCha20-Poly1305 (192-bit Extended Nonce)</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label">Plaintext Payload</label>
+                <input type="text" id="aead-pt" class="crypto-input" value="Transfer $1,000,000 to Account #99281">
+              </div>
+
+              <div class="input-row">
+                <div class="control-group">
+                  <label class="control-label">Secret Key (Hex / Seed)</label>
+                  <input type="text" id="aead-key" class="crypto-input" value="SUPER_SECRET_KEY_256_BITS">
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Nonce / IV</label>
+                  <input type="text" id="aead-nonce" class="crypto-input" value="nonce-96bit-123">
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label">Associated Data (AAD, Unencrypted Routing Header)</label>
+                <input type="text" id="aead-aad" class="crypto-input" value='{"header":"TLS_1_3_RECORD","epoch":2}'>
+              </div>
+
+              <div class="input-row" style="margin-top: 6px;">
+                <button class="lab-action-btn" id="btn-tamper-ct" style="padding: 0.5rem; font-size: 0.78rem;">Flip 1-bit in Ciphertext</button>
+                <button class="lab-action-btn" id="btn-tamper-aad" style="padding: 0.5rem; font-size: 0.78rem;">Flip 1-bit in AAD Header</button>
+                <button class="btn-icon" id="btn-reset-tamper" style="width: auto; padding: 0.5rem 0.8rem; font-size: 0.75rem;">Reset</button>
+              </div>
+
+              <div class="output-box">
+                <div class="output-header">
+                  <span class="output-title">Transmitted Ciphertext</span>
+                </div>
+                <div id="aead-ct-out" class="output-content" style="font-size: 0.75rem;"></div>
+              </div>
+
+              <div class="input-row">
+                <div class="output-box">
+                  <span class="output-title">Sender Tag</span>
+                  <div id="aead-tag-out" class="output-content" style="font-size: 0.75rem; color: var(--accent-cyan);"></div>
+                </div>
+                <div class="output-box">
+                  <span class="output-title">Receiver Computed Tag</span>
+                  <div id="aead-rx-tag-out" class="output-content" style="font-size: 0.75rem; color: var(--accent-violet);"></div>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span id="aead-status-badge" class="status-pill status-secure">&#10003; AUTHENTICATION VERIFIED</span>
+              </div>
+
+              <div id="aead-verification-details" class="output-box" style="font-size: 0.8rem; line-height: 1.5;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 4: HASH FUNCTIONS & SPONGE CONSTRUCTIONS
+           ========================================================================= -->
+      <section id="section-4-hash" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-hash">Domain 04 // One-Way Digests</span>
+            <span class="section-security-level">Properties: Preimage &middot; Second Preimage &middot; Collision Resistance</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">04.</span> Cryptographic Hashes, XOFs & Algebraic Proof Hashes</h3>
+          <p class="section-lead">
+            Cryptographic hash functions map arbitrary-length inputs to fixed-size bitstrings. They must satisfy three core security guarantees: Preimage Resistance ($O(2^n)$), Second Preimage Resistance ($O(2^n)$), and Collision Resistance ($O(2^{n/2})$ via the Birthday Paradox). Modern applications demand Extendable-Output Functions (XOFs) and algebraic hashes for Zero-Knowledge Proofs.
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                The Merkle–Damgård Construction & Broken Hashes
+              </h4>
+              <p>
+                Traditional hashes split messages into fixed blocks, processing them sequentially through a one-way compression function $f$: $s_{i} = f(s_{i-1}, m_i)$.
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>MD5 (128-bit, Ron Rivest 1991):</strong> Catastrophically broken. In 2004, Wang et al. demonstrated practical collisions. Flame malware in 2012 used an MD5 collision to forge Microsoft code-signing certificates.</li>
+                <li><strong>SHA-1 (160-bit, NIST 1995):</strong> Broken. In 2017, Google and CWI Amsterdam published the <strong>SHAttered attack</strong>, generating two distinct PDF documents with identical SHA-1 hashes in $2^{63.1}$ computations.</li>
+                <li><strong>SHA-2 (SHA-256 / SHA-512, NIST FIPS 180-4):</strong> Secure standard. However, all Merkle–Damgård hashes (MD5, SHA-1, SHA-256) suffer from the <em>Length Extension Vulnerability</em>: given $H(M)$ and the length of $M$, an attacker can compute $H(M \parallel \text{pad} \parallel M')$ without knowing $M$.</li>
+              </ul>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                The Sponge Construction (SHA-3 / Keccak) & BLAKE3
+              </h4>
+              <p>
+                <strong>SHA-3 (FIPS 202, Keccak):</strong> Abandons Merkle–Damgård in favor of the <strong>Sponge Construction</strong> over a 1600-bit state ($5 \times 5$ array of 64-bit words) divided into <em>Rate $r$</em> and <em>Capacity $c$</em> ($r + c = 1600$).
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>Absorbing Phase:</strong> Input blocks are XORed into the first $r$ bits, followed by the Keccak-f[1600] permutation.</li>
+                <li><strong>Squeezing Phase:</strong> Output bits are read from the rate portion. Completely immune to length extension attacks by design!</li>
+                <li><strong>Extendable-Output Functions (XOFs):</strong> <em>SHAKE128</em> and <em>SHAKE256</em> allow squeezing arbitrary lengths of pseudorandom output (essential for post-quantum lattice sampling in Kyber and Dilithium).</li>
+              </ul>
+              <p>
+                <strong>BLAKE3:</strong> A tree-based cryptographic hash function based on the Bao tree format and ChaCha quarter-rounds. Supports automatic multi-threaded SIMD parallelization, producing cryptographic hashes at speeds exceeding <strong>15 GB/s</strong> while outperforming SHA-256 and SHA-3 in security margins.
+              </p>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                Algebraic Hashes for Zero-Knowledge Proofs (ZKPs)
+              </h4>
+              <p>
+                Standard hashes (SHA-256, Keccak) are extremely expensive to verify inside arithmetic circuits (zk-SNARKs / PLONK / Groth16) because bitwise operations (AND, XOR, rotations) require thousands of Rank-1 Constraint System (R1CS) equations per compression round.
+              </p>
+              <p>
+                <strong>Algebraic Hashes (Poseidon, Rescue, Reinforced Concrete, Anemoi):</strong> Designed natively over large prime fields $\mathbb{F}_p$ using low-degree non-linear power permutations:
+              </p>
+              <div class="math-box">
+                $$S(x) = x^{\alpha} \pmod p, \quad \text{where } \alpha = 5 \text{ (e.g. over the BN254 scalar field)}$$
+              </div>
+              <p>
+                These reduce zk-SNARK prover time by up to <strong>100&times;</strong>, enabling practical zero-knowledge rollups, private transactions (Tornado Cash / Aztec), and recursive zk-proof systems.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive Hash Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Cryptographic Hash & Avalanche Matrix Analyzer</div>
+                  <div class="lab-subtitle">WebCrypto SHA-256 &middot; 256-Bit SAC Heatmap &middot; Poseidon ZK</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div class="control-group">
+                <label class="control-label">Input Data for Live Hashing</label>
+                <input type="text" id="hash-input" class="crypto-input" value="CyberSecurity">
+              </div>
+
+              <button class="lab-action-btn" id="btn-flip-bit" style="padding: 0.5rem; font-size: 0.8rem;">
+                Flip 1 Single Bit in Input (Strict Avalanche Criterion Test)
+              </button>
+
+              <div class="output-box">
+                <span class="output-title">SHA-256 Digest (FIPS 180-4, Native WebCrypto)</span>
+                <div id="hash-sha256-out" class="output-content" style="font-size: 0.72rem; color: var(--accent-cyan);"></div>
+              </div>
+
+              <div class="output-box">
+                <span class="output-title">SHA-3 (Keccak Sponge Emulation)</span>
+                <div id="hash-sha3-out" class="output-content" style="font-size: 0.72rem; color: var(--accent-violet);"></div>
+              </div>
+
+              <!-- 256-bit Avalanche Heatmap -->
+              <div>
+                <div class="control-label" style="margin-bottom: 4px;">
+                  <span>Strict Avalanche Criterion (SAC) // 256-Bit Difference Matrix</span>
+                </div>
+                <div id="avalanche-matrix-grid" class="avalanche-grid"></div>
+                <div id="avalanche-stats" style="margin-top: 6px; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4;"></div>
+              </div>
+
+              <!-- Poseidon ZK Field Hash Box -->
+              <div class="output-box">
+                <span class="output-title">Poseidon Algebraic S-Box Layer (ZK Field Arithmetic)</span>
+                <div id="poseidon-step-preview"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 5: KEY DERIVATION & PASSWORD HASHING (KDF & PAKE)
+           ========================================================================= -->
+      <section id="section-5-kdf" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-kdf">Domain 05 // Password Defense</span>
+            <span class="section-security-level">Architecture: Memory-Hard Functions & Zero-Leakage PAKE</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">05.</span> Key Derivation & Password-Authenticated Key Exchange</h3>
+          <p class="section-lead">
+            Human passwords have extremely low entropy (rarely exceeding 30–40 bits). Standard fast hashes (SHA-256) are completely inadequate for password storage because specialized ASIC/GPU clusters evaluate billions of hashes per second. Secure systems require memory-hard Password Hashing Functions and Password-Authenticated Key Exchange (PAKE).
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                The Evolution of Memory-Hard Password Hashing
+              </h4>
+              <p>
+                <strong>PBKDF2 (NIST SP 800-132, RFC 8018):</strong> Computes repeated HMAC iterations (e.g. 600,000 iterations of HMAC-SHA256). <em>Flaw:</em> PBKDF2 requires virtually zero RAM. An adversary can parallelize millions of candidate passwords inside custom FPGA/ASIC hardware without memory bandwidth bottlenecks.
+              </p>
+              <p>
+                <strong>bcrypt (Niels Provos & David Mazières, 1999):</strong> Based on the Eksblowfish (Exact-Key-Setup Blowfish) algorithm with a 4 KB internal memory state. While effective in 1999, modern GPUs easily hold 4 KB in ultra-fast L1 cache, allowing high cracking rates.
+              </p>
+              <p>
+                <strong>scrypt (Colin Percival, 2009):</strong> Introduced true sequential memory-hard functions. Requires large RAM buffers ($N, r, p$) to prevent ASIC acceleration by forcing high memory bus bandwidth demands.
+              </p>
+              <p>
+                <strong>Argon2 (Winner of the Password Hashing Competition 2015, RFC 9106):</strong> The state of the art in password protection. Operates in three variants:
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>Argon2d:</strong> Data-dependent memory addressing. Maximizes resistance against GPU/ASIC cracking, but vulnerable to cache-timing side-channel attacks.</li>
+                <li><strong>Argon2i:</strong> Data-independent memory addressing. Protects against side-channel and timing attacks (recommended for disk encryption and KDF).</li>
+                <li><strong>Argon2id (Standard Standard):</strong> Hybrid mode: first pass operates in Argon2i mode to neutralize side channels, subsequent passes operate in Argon2d mode to maximize GPU resistance.</li>
+              </ul>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                Key Derivation: HKDF (RFC 5869)
+              </h4>
+              <p>
+                Cryptographic primitives require uniformly distributed random byte sequences, whereas Diffie-Hellman shared secrets contain mathematical group structures. HKDF formalizes the <strong>Extract-then-Expand</strong> paradigm:
+              </p>
+              <div class="math-box">
+                $$\text{PRK} = \text{HMAC-Hash}(\text{salt}, \text{IKM}) \quad \longrightarrow \quad \text{OKM} = \text{HKDF-Expand}(\text{PRK}, \text{info}, L)$$
+              </div>
+              <p>
+                Used across TLS 1.3, Signal Protocol, Noise, and IPsec to safely derive independent encryption, MAC, and IV keys from a single master secret.
+              </p>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Password-Authenticated Key Exchange (PAKE)
+              </h4>
+              <p>
+                Traditional authentication transmits passwords or password hashes to a server, making them vulnerable to database breaches and server-side compromise.
+              </p>
+              <p>
+                <strong>PAKE (SRP, SPAKE2, OPAQUE, CPace):</strong> Allows a client and server who share a low-entropy password to establish a cryptographically strong shared key <em>without ever exposing the password to the network or allowing an eavesdropper to perform offline dictionary attacks</em>.
+              </p>
+              <p>
+                <strong>OPAQUE (IETF Draft standard):</strong> The pinnacle of asymmetric PAKE. The client blinds the password using an Oblivious Pseudorandom Function (OPRF). The server holds only an encrypted envelope and evaluates the OPRF without ever learning the password. Even if the server's entire database is stolen, the attacker cannot verify a candidate password offline without access to the server's secret OPRF key!
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive KDF & PAKE Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Password Defense Benchmark & PAKE Flow</div>
+                  <div class="lab-subtitle">Argon2id &middot; PBKDF2 &middot; bcrypt &middot; OPAQUE Handshake</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div class="control-label" style="margin-bottom: 4px;">Password Hashing Parameters (Adjust to compare GPU resistance)</div>
+
+              <div class="control-group">
+                <label class="control-label">Argon2id Memory ($m$): <span id="argon-mem-val" class="value-badge">64 MB</span></label>
+                <input type="range" id="argon-mem" min="16" max="256" step="16" value="64" class="crypto-slider">
+              </div>
+
+              <div class="input-row">
+                <div class="control-group">
+                  <label class="control-label">Argon2id Passes ($t$): <span id="argon-iter-val" class="value-badge">3 passes</span></label>
+                  <input type="range" id="argon-iter" min="1" max="10" value="3" class="crypto-slider">
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Parallelism ($p$): <span id="argon-threads-val" class="value-badge">4 threads</span></label>
+                  <input type="range" id="argon-threads" min="1" max="8" value="4" class="crypto-slider">
+                </div>
+              </div>
+
+              <div class="input-row">
+                <div class="control-group">
+                  <label class="control-label">PBKDF2 Iterations: <span id="pbkdf2-iter-val" class="value-badge">600,000</span></label>
+                  <input type="range" id="pbkdf2-iter" min="50000" max="1000000" step="50000" value="600000" class="crypto-slider">
+                </div>
+                <div class="control-group">
+                  <label class="control-label">bcrypt Cost ($2^C$): <span id="bcrypt-cost-val" class="value-badge">2^12 rounds</span></label>
+                  <input type="range" id="bcrypt-cost" min="10" max="15" value="12" class="crypto-slider">
+                </div>
+              </div>
+
+              <!-- 8x RTX 4090 GPU Benchmark -->
+              <div class="benchmark-container" style="margin-top: 10px;">
+                <div class="control-label" style="color: var(--accent-amber);">Estimated 8&times; NVIDIA RTX 4090 Cluster Cracking Throughput</div>
+
+                <div class="benchmark-row">
+                  <div class="benchmark-label-row">
+                    <span>PBKDF2-HMAC-SHA256 (CPU-only bound)</span>
+                    <span id="hps-pbkdf2" style="color: var(--accent-crimson);">66,000 H/s</span>
+                  </div>
+                  <div class="benchmark-track"><div id="bar-pbkdf2" class="benchmark-fill fill-crimson" style="width: 100%;"></div></div>
+                  <small style="color: var(--text-dim); font-size: 0.7rem;">Time to brute-force 8-char password: <span id="time-pbkdf2" style="color: #fff;">104 years</span></small>
+                </div>
+
+                <div class="benchmark-row">
+                  <div class="benchmark-label-row">
+                    <span>bcrypt (4 KB L1 Cache bound)</span>
+                    <span id="hps-bcrypt" style="color: var(--accent-amber);">14,400 H/s</span>
+                  </div>
+                  <div class="benchmark-track"><div id="bar-bcrypt" class="benchmark-fill fill-amber" style="width: 25%;"></div></div>
+                  <small style="color: var(--text-dim); font-size: 0.7rem;">Time to brute-force 8-char password: <span id="time-bcrypt" style="color: #fff;">480 years</span></small>
+                </div>
+
+                <div class="benchmark-row">
+                  <div class="benchmark-label-row">
+                    <span>Argon2id (Memory-Hard VRAM bottleneck)</span>
+                    <span id="hps-argon2" style="color: var(--accent-emerald);">960 H/s</span>
+                  </div>
+                  <div class="benchmark-track"><div id="bar-argon2" class="benchmark-fill fill-emerald" style="width: 5%;"></div></div>
+                  <small style="color: var(--text-dim); font-size: 0.7rem;">Time to brute-force 8-char password: <span id="time-argon2" style="color: #fff;">7,200 years</span></small>
+                </div>
+              </div>
+
+              <!-- Interactive OPAQUE Handshake Flow -->
+              <div style="margin-top: 12px; border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                <div class="output-header">
+                  <span class="output-title">OPAQUE Asymmetric PAKE Handshake Simulation</span>
+                  <button class="lab-action-btn" id="btn-pake-step" style="width: auto; padding: 0.25rem 0.75rem; font-size: 0.75rem;">Step Forward &rarr;</button>
+                </div>
+                <div class="protocol-steps-list">
+                  <div class="protocol-step-item pake-step-item active">
+                    <span class="step-badge">1</span>
+                    <div class="step-details">
+                      <h5>Client Blinds Password via OPRF</h5>
+                      <p>Client generates random blinding scalar $r$ and sends $\alpha = H_1(P)^r$ to Server.</p>
+                    </div>
+                  </div>
+                  <div class="protocol-step-item pake-step-item">
+                    <span class="step-badge">2</span>
+                    <div class="step-details">
+                      <h5>Server Evaluates OPRF</h5>
+                      <p>Server raises $\alpha$ to its secret key $k$: $\beta = \alpha^k$ and returns $\beta$ with encrypted envelope.</p>
+                    </div>
+                  </div>
+                  <div class="protocol-step-item pake-step-item">
+                    <span class="step-badge">3</span>
+                    <div class="step-details">
+                      <h5>Client Unblinds & Authenticates</h5>
+                      <p>Client computes $r^{-1}$, retrieves credential envelope, and completes mutual authenticated key exchange.</p>
+                    </div>
+                  </div>
+                </div>
+                <div id="pake-flow-status" class="output-box" style="font-size: 0.75rem; color: var(--accent-cyan);">
+                  Step 1: Client blinds password. The server never observes plaintext entropy.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 6: CLASSICAL PUBLIC-KEY CRYPTOGRAPHY (ASYMMETRIC)
+           ========================================================================= -->
+      <section id="section-6-publickey" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-publickey">Domain 06 // Number Theory</span>
+            <span class="section-security-level">Threat Notice: Shor's Quantum Algorithm Breaks in Polynomial Time</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">06.</span> Classical Public-Key Cryptography & The Quantum Threat</h3>
+          <p class="section-lead">
+            Public-key cryptography revolutionized cybersecurity by enabling secure key exchange over untrusted channels without a pre-shared secret. Relying on mathematical trapdoor one-way functions—Integer Factorization and the Discrete Logarithm Problem (DLP / ECDLP)—it underpins RSA, Diffie-Hellman, and Elliptic Curve Cryptography (ECC).
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                RSA & Trapdoor Permutations
+              </h4>
+              <p>
+                Invented by Ron Rivest, Adi Shamir, and Leonard Adleman in 1977. Security relies on the hardness of factoring a product of two large prime numbers $n = p \cdot q$.
+              </p>
+              <div class="math-box">
+                $$c \equiv m^e \pmod n, \quad m \equiv c^d \pmod n, \quad \text{where } e \cdot d \equiv 1 \pmod{\phi(n)}$$
+              </div>
+              <p>
+                <strong>Padding Necessity:</strong> "Textbook" unpadded RSA is multiplicatively homomorphic ($E(m_1) \cdot E(m_2) = E(m_1 \cdot m_2)$) and trivial to break. Secure RSA mandates <strong>RSA-OAEP</strong> (Optimal Asymmetric Encryption Padding) for encryption and <strong>RSA-PSS</strong> (Probabilistic Signature Scheme) for digital signatures.
+              </p>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+                Diffie-Hellman & Elliptic Curve Cryptography (ECC)
+              </h4>
+              <p>
+                <strong>Diffie-Hellman (DH):</strong> Allows Alice ($g^a$) and Bob ($g^b$) to compute shared secret $g^{ab} \pmod p$. Provides <em>Forward Secrecy</em> when keys are ephemeral (DHE).
+              </p>
+              <p>
+                <strong>Elliptic Curve Discrete Log Problem (ECDLP):</strong> Defined over the group of points satisfying the Weierstrass equation $y^2 = x^3 + ax + b$ over a finite field $\mathbb{F}_p$. Scalar multiplication $Q = d \cdot G$ is easy; calculating scalar $d$ from $Q$ and $G$ requires $O(\sqrt{p})$ steps via Pollard's rho algorithm.
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>NIST P-256 (secp256r1):</strong> Standard US government curve. Generates 128-bit security with 256-bit keys (compared to 3072-bit keys required by RSA).</li>
+                <li><strong>secp256k1:</strong> Koblitz curve with efficient endomorphism, chosen by Satoshi Nakamoto for Bitcoin and Ethereum signatures.</li>
+                <li><strong>Curve25519 (X25519 / Ed25519):</strong> Montgomery curve $y^2 = x^3 + 486662x^2 + x$ designed by djb. Immune to side-channel timing attacks, avoids exceptional points, and uses the Montgomery ladder for constant-time multiplication.</li>
+                <li><strong>Pairing-Friendly Curves (BLS12-381, BN254):</strong> Support bilinear pairings $e: G_1 \times G_2 \to G_T$, enabling BLS signature aggregation (Ethereum PoS consensus) and zk-SNARKs.</li>
+              </ul>
+              <div class="vuln-box">
+                <div class="vuln-box-title">Cryptanalytic Catastrophe // ECDSA Nonce-Reuse Attack</div>
+                <p>In ECDSA signatures $(r, s)$, the nonce $k$ must be strictly unique per signature. If an identical nonce $k$ is reused to sign two distinct messages $z_1$ and $z_2$, an attacker recovers $k = \frac{z_1 - z_2}{s_1 - s_2} \pmod n$ and extracts the private key $d = \frac{s_1 k - z_1}{r} \pmod n$ in a single line of arithmetic! This destroyed Sony's PlayStation 3 security in 2010. Ed25519 eliminates this by computing $k$ deterministically.</p>
+              </div>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                The Existential Threat: Shor's Quantum Algorithm
+              </h4>
+              <p>
+                In 1994, Peter Shor formulated a quantum algorithm that solves both Integer Factorization and Discrete Logarithms in <strong>polynomial time</strong>:
+              </p>
+              <div class="math-box">
+                $$O\big((\log N)^3\big) \quad \text{vs. Classical General Number Field Sieve (GNFS): } O\left(e^{\sqrt[3]{\frac{64}{9}\ln N (\ln \ln N)^2}}\right)$$
+              </div>
+              <p>
+                By utilizing the Quantum Fourier Transform (QFT) to find the period $r$ of the modular function $f(x) = a^x \pmod N$, Shor's algorithm completely breaks <strong>RSA, Diffie-Hellman, DSA, ECDSA, Ed25519, and all pairing-based schemes</strong> once a Cryptanalytically Relevant Quantum Computer (CRQC) with ~4,000 physical/logical qubits is built.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive Public-Key Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Public-Key & Elliptic Curve Inspector</div>
+                  <div class="lab-subtitle">Toy RSA &middot; Canvas ECC Point Addition &middot; Nonce Leak</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div class="segmented-pills">
+                <button class="segmented-pill pk-tab-btn active" data-tab="rsa">Toy RSA Keygen</button>
+                <button class="segmented-pill pk-tab-btn" data-tab="ecc">Canvas ECC Visualizer</button>
+                <button class="segmented-pill pk-tab-btn" data-tab="ecdsa">ECDSA Nonce Leak</button>
+                <button class="segmented-pill pk-tab-btn" data-tab="shor">Shor's Threat</button>
+              </div>
+
+              <!-- VIEW 1: Toy RSA -->
+              <div id="pk-view-rsa">
+                <div class="input-row">
+                  <div class="control-group">
+                    <label class="control-label">Prime $p$</label>
+                    <input type="number" id="rsa-p" class="crypto-input" value="61">
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Prime $q$</label>
+                    <input type="number" id="rsa-q" class="crypto-input" value="53">
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Message integer $m$</label>
+                    <input type="number" id="rsa-msg" class="crypto-input" value="65">
+                  </div>
+                </div>
+
+                <div class="output-box" style="margin-top: 10px; font-size: 0.78rem;">
+                  <div id="rsa-modulus-out" style="color: var(--accent-cyan);"></div>
+                  <div id="rsa-phi-out" style="color: var(--text-secondary);"></div>
+                  <div id="rsa-pub-out" style="color: var(--accent-emerald); font-weight: 700; margin-top: 4px;"></div>
+                  <div id="rsa-priv-out" style="color: var(--accent-crimson); font-weight: 700;"></div>
+                  <div id="rsa-ct-out" style="margin-top: 6px; color: #fff;"></div>
+                  <div id="rsa-pt-out" style="color: var(--accent-emerald);"></div>
+                </div>
+              </div>
+
+              <!-- VIEW 2: Canvas ECC Point Addition -->
+              <div id="pk-view-ecc" style="display: none;">
+                <div class="canvas-display-container">
+                  <canvas id="ecc-canvas"></canvas>
+                </div>
+                <div class="input-row" style="margin-top: 8px;">
+                  <div class="control-group">
+                    <label class="control-label">Point $P$ X-coord</label>
+                    <input type="range" id="ecc-slider-p" min="-1.8" max="0.5" step="0.1" value="-1.5" class="crypto-slider">
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Point $Q$ X-coord</label>
+                    <input type="range" id="ecc-slider-q" min="1.0" max="3.5" step="0.1" value="2.0" class="crypto-slider">
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; margin: 6px 0;">
+                  <input type="checkbox" id="ecc-mode-double">
+                  <label for="ecc-mode-double" style="font-size: 0.8rem; color: var(--text-secondary);">Toggle Point Doubling Mode ($2P = P + P$ using tangent line)</label>
+                </div>
+                <div id="ecc-coords-out" class="output-box" style="font-size: 0.75rem;"></div>
+              </div>
+
+              <!-- VIEW 3: ECDSA Nonce Reuse -->
+              <div id="pk-view-ecdsa" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span class="control-label" style="color: var(--accent-crimson);">PlayStation 3 ECDSA Nonce Reuse Exploit</span>
+                  <button class="lab-action-btn" id="btn-extract-ecdsa" style="width: auto; padding: 0.3rem 0.8rem; font-size: 0.75rem;">Extract Private Key Now</button>
+                </div>
+                <div id="ecdsa-leak-out" class="output-box"></div>
+              </div>
+
+              <!-- VIEW 4: Shor's Threat Breakdown -->
+              <div id="pk-view-shor" style="display: none;">
+                <div class="math-box">
+                  <strong>Shor's Algorithm Steps to Factor $N = p \cdot q$:</strong><br>
+                  1. Pick random integer $a < N$ such that $\gcd(a, N) = 1$.<br>
+                  2. Construct quantum superposition state: $\frac{1}{\sqrt{Q}} \sum_{x=0}^{Q-1} |x\rangle |a^x \pmod N\rangle$.<br>
+                  3. Measure the second register; the first register collapses to a periodic state with period $r$.<br>
+                  4. Apply Quantum Fourier Transform (QFT) to extract period $r$.<br>
+                  5. If $r$ is even, compute $\gcd(a^{r/2} \pm 1, N)$ classically via Euclidean algorithm to extract factors $p$ and $q$!
+                </div>
+                <div class="vuln-box" style="margin-top: 8px;">
+                  <div class="vuln-box-title">&times; Complete Asymmetric Breakdown</div>
+                  <p>Every certificate, SSH key, and encrypted tunnel relying on RSA, ECDSA, or Diffie-Hellman will be decrypted instantly once a quantum computer with sufficient error-corrected qubits is constructed.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 7: POST-QUANTUM CRYPTOGRAPHY (PQC - NIST STANDARDS)
+           ========================================================================= -->
+      <section id="section-7-pqc" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-pqc">Domain 07 // The New Era</span>
+            <span class="section-security-level">Official Standards: NIST FIPS 203 &middot; 204 &middot; 205 (August 2024 / 2025)</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">07.</span> Post-Quantum Cryptography (PQC)</h3>
+          <p class="section-lead">
+            Post-Quantum Cryptography refers to <strong>classical algorithms running on existing conventional computers and networks</strong> designed to resist attacks from both classical and cryptanalytically relevant quantum computers. In August 2024, NIST officially published the world's first finalized PQC standards (FIPS 203, FIPS 204, FIPS 205), marking the greatest cryptographic migration in human history.
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                The Official NIST Standards (FIPS 203, 204, 205, 206)
+              </h4>
+              <p>
+                <strong>ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism, FIPS 203):</strong> Based on CRYSTALS-Kyber. Selected as the primary global standard for general encryption and key exchange. Operates across three security levels: ML-KEM-512 (Category 1, AES-128 equivalent), ML-KEM-768 (Category 3, AES-192 equivalent, primary Internet standard), and ML-KEM-1024 (Category 5, AES-256 equivalent).
+              </p>
+              <p>
+                <strong>ML-DSA (Module-Lattice-Based Digital Signature Algorithm, FIPS 204):</strong> Based on CRYSTALS-Dilithium. The primary global standard for digital signatures, operating on the Fiat-Shamir with Aborts lattice framework over module lattices.
+              </p>
+              <p>
+                <strong>SLH-DSA (Stateless Hash-Based Digital Signature Algorithm, FIPS 205):</strong> Based on SPHINCS+. Built purely on cryptographic hash functions (SHAKE256 / SHA-256). Provides an invaluable mathematical hedge: <em>even if module lattices suffer an unforeseen mathematical breakthrough, SLH-DSA remains completely unbreakable because it relies solely on the preimage resistance of standard hashes!</em>
+              </p>
+              <p>
+                <strong>FN-DSA (Falcon, FIPS 206, finalized 2025):</strong> Fast-Fourier lattice-based signature scheme using Gaussian sampling over NTRU lattices. Produces the smallest combined public-key and signature sizes among all lattice candidates, but requires constant-time 64-bit floating-point emulation.
+              </p>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
+                Mathematical Families of Post-Quantum Cryptography
+              </h4>
+              <div class="subtopic-cards">
+                <div class="subtopic-card">
+                  <div class="subtopic-title">Lattice-Based Cryptography</div>
+                  <div class="subtopic-desc">Learning With Errors (LWE), Ring-LWE, Module-LWE, and NTRU. Finding the shortest vector (SVP) in an $n$-dimensional lattice ($n \ge 512$) has no known subexponential quantum algorithm. Includes ML-KEM, ML-DSA, FrodoKEM, and Streamlined NTRU Prime (sntrup761 in OpenSSH).</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">Code-Based Cryptography</div>
+                  <div class="subtopic-desc">Based on the hardness of decoding random linear error-correcting codes (Syndrome Decoding). <strong>Classic McEliece</strong> (Goppa codes) has resisted cryptanalysis since 1978! <strong>HQC (Hamming Quasi-Cyclic)</strong> was officially selected by NIST in 2025 as the secondary general-purpose backup KEM.</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">Hash-Based Signatures</div>
+                  <div class="subtopic-desc">Lamport one-time signatures combined with Merkle trees. Stateful variants (XMSS RFC 8391, LMS RFC 8554) require strict state management for firmware signing. SLH-DSA (SPHINCS+) is completely stateless and safe for general software.</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">MPC-in-the-Head & Symmetric</div>
+                  <div class="subtopic-desc">Constructs signatures by proving knowledge of a symmetric key in zero-knowledge using multi-party computation simulations. Includes Picnic, FAEST, Mirath, MQOM, and RYDE.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Cryptanalytic Disasters: The Fall of SIKE & Rainbow (2022)
+              </h4>
+              <p>
+                The PQC transition demonstrated that novel algebraic hardness assumptions require intense, decade-long scrutiny:
+              </p>
+              <div class="vuln-box">
+                <div class="vuln-box-title">SIKE Post-Mortem // Castryck-Decru Isogeny Attack</div>
+                <p>Supersingular Isogeny Key Encapsulation (SIKE) was celebrated for its tiny key sizes. In July 2022, Wouter Castryck and Thomas Decru published an attack using the Kani-Gani-Pila theorem. By exploiting the public auxiliary torsion points ($P_A, Q_A$), they reduced the problem to finding an isogeny between abelian surfaces, <strong>recovering the secret key in under 60 minutes on a single Intel Core i5 laptop core!</strong> SIKE collapsed completely.</p>
+              </div>
+              <div class="vuln-box">
+                <div class="vuln-box-title">Rainbow Post-Mortem // Beullens' MinRank Attack</div>
+                <p>Rainbow was a leading NIST Round 3 finalist multivariate quadratic signature scheme. In 2022, Ward Beullens published the MinRank intersection attack, piercing the vinegar and oil layers to break Rainbow Level 1 in 53 hours on a standard laptop!</p>
+              </div>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Hybrid Deployments (X25519 + ML-KEM-768)
+              </h4>
+              <p>
+                Because lattice assumptions are relatively new compared to 40-year-old DH primitives, industry leaders (Google, Cloudflare, Apple, Signal) mandated <strong>Hybrid Key Exchange</strong>:
+              </p>
+              <div class="math-box">
+                $$SS_{\text{hybrid}} = \text{HKDF-Extract}\big(\text{salt}, SS_{\text{X25519}} \parallel SS_{\text{ML-KEM-768}}\big)$$
+              </div>
+              <p>
+                Enabled by default in Chromium and Firefox TLS 1.3 as <code>x25519_mlkem768</code>, and in Signal's <strong>PQXDH</strong> protocol, this guarantees that communications remain unconditionally protected by classical ECDH even if lattice crypto suffers a theoretical break, while thwarting "Harvest Now, Decrypt Later" quantum recording!
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive PQC Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Post-Quantum & Lattice Workbench</div>
+                  <div class="lab-subtitle">Module-LWE &middot; ML-KEM vs RSA Sizes &middot; Hybrid TLS Combiner</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div class="segmented-pills">
+                <button class="segmented-pill pqc-tab-btn active" data-tab="lwe">Module-LWE Noisy Vector</button>
+                <button class="segmented-pill pqc-tab-btn" data-tab="sizes">Key Size Benchmark</button>
+                <button class="segmented-pill pqc-tab-btn" data-tab="breaks">Broken PQC Post-Mortem</button>
+                <button class="segmented-pill pqc-tab-btn" data-tab="hybrid">Hybrid Combiner</button>
+              </div>
+
+              <!-- VIEW 1: Module-LWE Grid -->
+              <div id="pqc-view-lwe">
+                <div class="input-row" style="margin-bottom: 8px;">
+                  <div class="control-group">
+                    <label class="control-label">Modulus $q$</label>
+                    <select id="lwe-mod-q" class="crypto-select">
+                      <option value="17">q = 17 (Toy field)</option>
+                      <option value="97">q = 97</option>
+                      <option value="3329">q = 3329 (ML-KEM / Kyber exact modulus!)</option>
+                    </select>
+                  </div>
+                  <div class="control-group" style="justify-content: center;">
+                    <label class="control-label" style="display: flex; align-items: center; gap: 6px;">
+                      <input type="checkbox" id="lwe-noise-toggle" checked>
+                      <span>Inject Small Error $\mathbf{e}$ (LWE Security)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <button class="lab-action-btn" id="btn-regen-lwe" style="padding: 0.4rem; font-size: 0.78rem; margin-bottom: 8px;">Regenerate Lattice Matrix</button>
+
+                <div id="lwe-display" class="output-box"></div>
+              </div>
+
+              <!-- VIEW 2: Key Size Benchmark -->
+              <div id="pqc-view-sizes" style="display: none;">
+                <div class="control-label" style="margin-bottom: 8px;">Public Key & Ciphertext Size Explosion (Logarithmic Scale)</div>
+                <div id="pqc-size-comparison" class="benchmark-container"></div>
+                <div class="math-box" style="margin-top: 10px; font-size: 0.75rem;">
+                  Notice how ML-KEM-768 requires 1,184-byte public keys (vs 32 bytes for X25519), and Classic McEliece requires 261 KB! Protocols like TLS and DNSSEC must adapt packet MTUs and TCP fragment handling.
+                </div>
+              </div>
+
+              <!-- VIEW 3: Broken PQC Post-Mortem -->
+              <div id="pqc-view-breaks" style="display: none;">
+                <div class="vuln-box">
+                  <div class="vuln-box-title">&times; SIKE / SIDH (July 2022 Castryck-Decru Attack)</div>
+                  <p>Castryck and Decru proved that the auxiliary points $P_A, Q_A$ published by Alice gave Bob the exact endomorphism ring structure of the elliptic curve $E_0$. Using Richelot isogenies between 2-dimensional abelian surfaces, the private key was recovered in 55 minutes on an Intel Core i5.</p>
+                </div>
+                <div class="vuln-box" style="margin-top: 8px;">
+                  <div class="vuln-box-title">&times; Rainbow Multivariate Signatures (2022 MinRank Attack)</div>
+                  <p>Ward Beullens demonstrated that the oil-vinegar matrix intersections had a lower MinRank than expected. By solving the MinRank problem using Macaulay matrices, the signature scheme was completely forged in a weekend.</p>
+                </div>
+              </div>
+
+              <!-- VIEW 4: Hybrid TLS Combiner -->
+              <div id="pqc-view-hybrid" style="display: none;">
+                <div class="control-label" style="margin-bottom: 6px;">IETF RFC Standard Hybrid Key Derivation Simulation</div>
+                <button class="lab-action-btn" id="btn-combine-hybrid" style="margin-bottom: 8px; padding: 0.4rem;">Recompute Hybrid Master Secret</button>
+                <div id="hybrid-combiner-out" class="output-box"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 8: QUANTUM CRYPTOGRAPHY PROPER (PHYSICS & QKD)
+           ========================================================================= -->
+      <section id="section-8-quantum" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-quantum">Domain 08 // Physics-Based Security</span>
+            <span class="section-security-level">Security: Unconditional Information-Theoretic (Heisenberg & No-Cloning)</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">08.</span> Quantum Cryptography Proper & Quantum Key Distribution</h3>
+          <p class="section-lead">
+            Unlike post-quantum cryptography (which runs mathematical algorithms on classical hardware), <strong>Quantum Cryptography uses the fundamental laws of quantum physics</strong> (Heisenberg's Uncertainty Principle, the No-Cloning Theorem, and Quantum Entanglement) to build systems with unconditional, physics-guaranteed security.
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m14 10-4 4"/><path d="m10 10 4 4"/></svg>
+                Quantum Key Distribution (QKD) Protocols
+              </h4>
+              <p>
+                <strong>BB84 Protocol (Bennett & Brassard, 1984):</strong> The cornerstone of quantum cryptography. Alice encodes bits onto single photons using two non-orthogonal polarization bases:
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>Rectilinear Basis ($+$):</strong> Bit 0 $\to |H\rangle$ ($0^\circ$), Bit 1 $\to |V\rangle$ ($90^\circ$).</li>
+                <li><strong>Diagonal Basis ($\times$):</strong> Bit 0 $\to |+45^\circ\rangle$, Bit 1 $\to |-45^\circ\rangle$.</li>
+              </ul>
+              <p>
+                <strong>The No-Cloning Theorem (Wootters & Zurek, 1982):</strong> It is physically impossible to create an identical copy of an arbitrary unknown quantum state $|\psi\rangle$. Therefore, if an eavesdropper (Eve) intercepts the photon, she cannot clone it. She must measure it in a randomly guessed basis. If she guesses the wrong basis, she irreversibly collapses the quantum state, introducing a <strong>Quantum Bit Error Rate (QBER) of ~25%</strong> into Bob's measurements! Alice and Bob detect Eve's presence by publicly comparing a subset of their sifted keys. If $\text{QBER} > 11\%$, they abort the transmission.
+              </p>
+              <p>
+                <strong>B92 (Bennett 1992):</strong> Minimalist QKD using only two non-orthogonal states.
+              </p>
+              <p>
+                <strong>E91 Protocol (Artur Ekert, 1991):</strong> Entanglement-based QKD. Alice and Bob share entangled EPR pairs $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$. They verify the security of the quantum channel by testing the violation of Bell's Theorem / the <strong>Clauser-Horne-Shimony-Holt (CHSH) inequality</strong> ($S \le 2$ classically; quantum mechanics yields $S = 2\sqrt{2} \approx 2.828$). If an eavesdropper interferes, quantum entanglement is destroyed and $S$ drops $\le 2$, instantly exposing Eve.
+              </p>
+              <p>
+                <strong>Advanced QKD Variants:</strong>
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>Continuous-Variable QKD (CV-QKD):</strong> Modulates coherent states using standard telecommunications homodyne detectors.</li>
+                <li><strong>Measurement-Device-Independent QKD (MDI-QKD):</strong> Eliminates all detector side-channel vulnerabilities by having Alice and Bob send photons to an untrusted middle relay.</li>
+                <li><strong>Twin-Field QKD (TF-QKD):</strong> Overcomes the Pirandola-Laurenza-Ottaviani-Banchi (PLOB) repeaterless channel capacity limit, extending fiber QKD range beyond 500 km.</li>
+                <li><strong>Satellite QKD (Micius Satellite):</strong> Chinese Academy of Sciences achieved intercontinental quantum key distribution across 1,200 km between China and Austria via low-Earth orbit satellites.</li>
+              </ul>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                Quantum Money, QRNG & Foundational Protocols
+              </h4>
+              <p>
+                <strong>Wiesner's Quantum Money (Stephen Wiesner, 1983):</strong> The historical genesis of quantum information theory. Banknotes contain a classical serial number $s$ and a sequence of isolated trapped qubits prepared in secret bases known only to the bank. By the No-Cloning Theorem, counterfeiters cannot replicate the banknote without measuring and altering the quantum states!
+              </p>
+              <p>
+                <strong>Quantum Random Number Generators (QRNG):</strong> Unlike classical pseudorandom algorithms (PRNGs), QRNGs sample fundamental quantum indeterminacy (e.g. photon beam splitters or vacuum fluctuations), producing true, certified non-deterministic entropy.
+              </p>
+              <p>
+                <strong>No-Go Theorems in Quantum Crypto:</strong> In 1997, Mayers, Lo, and Chau proved that <em>unconditionally secure Quantum Bit Commitment and Quantum Oblivious Transfer are physically impossible</em> without relativistic timing constraints or computational assumptions.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive Quantum Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Interactive Quantum Optics & BB84 QKD Simulator</div>
+                  <div class="lab-subtitle">Photon Polarization &middot; Eve Interception &middot; QBER Detection</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button class="lab-action-btn" id="btn-run-bb84" style="width: auto; padding: 0.4rem 1rem;">Transmit 12 Photons</button>
+                <label class="control-label" style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                  <input type="checkbox" id="eve-toggle">
+                  <span style="color: var(--accent-crimson); font-weight: 700;">Activate Eavesdropper Eve</span>
+                </label>
+              </div>
+
+              <!-- BB84 Quantum Channel Table -->
+              <div style="overflow-x: auto; max-height: 250px; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+                <table style="width: 100%; border-collapse: collapse; font-family: var(--font-mono);">
+                  <thead>
+                    <tr style="background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase;">
+                      <th style="padding: 6px;">#</th>
+                      <th style="padding: 6px;">Alice (Bit / Basis)</th>
+                      <th style="padding: 6px;">Eve Action</th>
+                      <th style="padding: 6px;">Bob Basis</th>
+                      <th style="padding: 6px;">Bob Measured</th>
+                      <th style="padding: 6px;">Sifting</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bb84-table-body">
+                    <!-- Populated by quantum-lab.js -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="bb84-status-box" class="math-box">
+                <!-- QBER message -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 9: ADVANCED & PRIVACY-ENHANCING CRYPTOGRAPHY (PETs)
+           ========================================================================= -->
+      <section id="section-9-advanced" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-advanced">Domain 09 // Next-Gen Privacy</span>
+            <span class="section-security-level">Paradigm: Verifiable Computation & Computation on Encrypted Data</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">09.</span> Advanced & Privacy-Enhancing Cryptography (PETs)</h3>
+          <p class="section-lead">
+            Privacy-Enhancing Technologies (PETs) represent the pinnacle of modern theoretical and applied cryptography: proving statements without revealing information (Zero-Knowledge Proofs), computing directly on encrypted ciphertexts without decrypting (Homomorphic Encryption), and executing multi-party computations with zero mutual trust (MPC).
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M12 2v10"/></svg>
+                Zero-Knowledge Proofs (ZKPs)
+              </h4>
+              <p>
+                A Zero-Knowledge Proof allows a Prover (Peggy) to convince a Verifier (Victor) that a statement is true without revealing any secret witness information beyond the validity of the statement itself. A ZKP must satisfy three mathematical properties:
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>Completeness:</strong> If the statement is true and both parties are honest, the verifier will always be convinced.</li>
+                <li><strong>Soundness:</strong> If the statement is false, no cheating prover can convince the verifier except with negligible probability.</li>
+                <li><strong>Zero-Knowledge:</strong> If the statement is true, the verifier learns nothing other than the fact that the statement is true.</li>
+              </ul>
+              <div class="subtopic-cards">
+                <div class="subtopic-card">
+                  <div class="subtopic-title">zk-SNARKs <span class="standard-badge">Succinct Non-Interactive</span></div>
+                  <div class="subtopic-desc">Proof size is tiny (~200–500 bytes) and verifies in milliseconds. Includes <em>Groth16</em> (requires circuit-specific trusted setup), <em>PLONK</em> (universal trusted setup with permutation polynomial arguments), and <em>Halo2</em> (recursive, transparent without trusted setup using inner product arguments).</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">zk-STARKs <span class="standard-badge">Post-Quantum Transparent</span></div>
+                  <div class="subtopic-desc">Invented by Eli Ben-Sasson (StarkWare). Relies purely on collision-resistant hashes and the Fast Reed-Solomon Interactive Oracle Proof of Proximity (FRI). <strong>Completely post-quantum secure and requires zero trusted setup!</strong> Proof sizes are larger (~50–100 KB).</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">Folding Schemes <span class="standard-badge">Nova & HyperNova</span></div>
+                  <div class="subtopic-desc">Groundbreaking 2022+ breakthrough replacing expensive recursive SNARK verification with simple vector-matrix linear combination folding, making Incremental Verifiable Computation (IVC) 100x faster.</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">Binius & Lasso / Jolt <span class="standard-badge">2024–2026 Frontier</span></div>
+                  <div class="subtopic-desc">Binius operates over binary tower fields $\mathbb{F}_2$, proving bitwise operations natively without finite-field simulation overhead. Lasso/Jolt introduces ultra-fast lookup-based arguments.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Homomorphic Encryption (FHE)
+              </h4>
+              <p>
+                Allows arbitrary computation directly on encrypted data without ever decrypting it:
+              </p>
+              <div class="math-box">
+                $$D\big(\text{Eval}(f, E(m_1), \dots, E(m_k))\big) = f(m_1, \dots, m_k)$$
+              </div>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>Partially Homomorphic (PHE):</strong> Supports one operation. RSA is multiplicative ($c_1 \cdot c_2 = E(m_1 \cdot m_2)$); <strong>Paillier Cryptosystem</strong> is additively homomorphic ($c_1 \cdot c_2 \pmod{n^2} = E(m_1 + m_2)$).</li>
+                <li><strong>Fully Homomorphic Encryption (FHE):</strong> Craig Gentry achieved the holy grail in 2009 via <em>Bootstrapping</em> (evaluating the decryption circuit homomorphically to refresh noisy ciphertexts). Modern schemes include:
+                  <ul style="padding-left: 1rem; margin-top: 4px;">
+                    <li><strong>BGV & BFV:</strong> Exact modular integer arithmetic.</li>
+                    <li><strong>CKKS:</strong> Approximate arithmetic over complex/real numbers, optimal for private Machine Learning (AI inference on encrypted medical records).</li>
+                    <li><strong>TFHE (Torus FHE):</strong> Fast gate bootstrapping in milliseconds per Boolean gate.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Multi-Party Computation (MPC), Shamir & ORAM
+              </h4>
+              <p>
+                <strong>Secure Multi-Party Computation (SMPC):</strong> Allows multiple parties $P_1, \dots, P_n$ to jointly compute $f(x_1, \dots, x_n)$ while keeping inputs private. Foundations include <em>Yao's Garbled Circuits</em> (2-party), <em>GMW / BGW protocols</em>, and <em>SPDZ</em> with Beaver multiplication triples. Modern applications include <strong>FROST</strong> (Flexible Round-Optimized Schnorr Threshold signatures for cryptocurrency multi-sig wallets).
+              </p>
+              <p>
+                <strong>Shamir's Secret Sharing ($k$-out-of-$n$):</strong> Splits a secret $S$ into $n$ shares using a random polynomial of degree $k-1$: $f(x) = S + a_1 x + \dots + a_{k-1} x^{k-1} \pmod p$. Any $k$ shares reconstruct $S$ via Lagrange Interpolation; any $k-1$ shares reveal mathematically zero information.
+              </p>
+              <p>
+                <strong>Oblivious RAM (ORAM) & PIR:</strong> Private Information Retrieval allows a client to query a cloud database without the cloud provider learning which record was accessed.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive ZKP & Privacy Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Zero-Knowledge & Privacy Laboratory</div>
+                  <div class="lab-subtitle">Schnorr ZKP &middot; Shamir (k,n) Polynomial &middot; Paillier FHE</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div class="segmented-pills">
+                <button class="segmented-pill zkp-tab-btn active" data-tab="schnorr">Schnorr ZKP Proof</button>
+                <button class="segmented-pill zkp-tab-btn" data-tab="shamir">Shamir (k, n) Secret</button>
+                <button class="segmented-pill zkp-tab-btn" data-tab="paillier">Paillier Homomorphism</button>
+              </div>
+
+              <!-- VIEW 1: Schnorr ZKP -->
+              <div id="zkp-view-schnorr">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <button class="lab-action-btn" id="btn-run-schnorr" style="width: auto; padding: 0.35rem 0.9rem; font-size: 0.78rem;">Generate Proof</button>
+                  <label class="control-label" style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                    <input type="checkbox" id="schnorr-imposter">
+                    <span style="color: var(--accent-crimson); font-weight: 600;">Simulate Imposter (Without Secret $x$)</span>
+                  </label>
+                </div>
+                <div id="schnorr-out" class="output-box"></div>
+              </div>
+
+              <!-- VIEW 2: Shamir Secret Sharing -->
+              <div id="zkp-view-shamir" style="display: none;">
+                <div class="input-row">
+                  <div class="control-group">
+                    <label class="control-label">Secret Integer $S$</label>
+                    <input type="number" id="shamir-secret" class="crypto-input" value="42">
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Threshold $k$</label>
+                    <input type="number" id="shamir-k" class="crypto-input" value="3">
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Total Shares $n$</label>
+                    <input type="number" id="shamir-n" class="crypto-input" value="5">
+                  </div>
+                </div>
+                <div id="shamir-out" class="output-box" style="margin-top: 10px;"></div>
+              </div>
+
+              <!-- VIEW 3: Paillier Additive Homomorphism -->
+              <div id="zkp-view-paillier" style="display: none;">
+                <div class="input-row">
+                  <div class="control-group">
+                    <label class="control-label">Plaintext $m_1$</label>
+                    <input type="number" id="paillier-m1" class="crypto-input" value="15">
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Plaintext $m_2$</label>
+                    <input type="number" id="paillier-m2" class="crypto-input" value="27">
+                  </div>
+                </div>
+                <div id="paillier-out" class="output-box" style="margin-top: 10px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 10: PROTOCOLS AND SYSTEMS BUILT ON THE PRIMITIVES
+           ========================================================================= -->
+      <section id="section-10-protocols" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-protocol">Domain 10 // Real-World Systems</span>
+            <span class="section-security-level">Scope: TLS 1.3 &middot; WireGuard &middot; Signal Double Ratchet &middot; FIDO2</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">10.</span> Security Protocols & Cryptographic Systems</h3>
+          <p class="section-lead">
+            Cryptographic primitives are meaningless in isolation. Real-world cybersecurity depends on <strong>security protocols</strong> that compose primitives into robust state machines resilient against active network adversaries, session hijacking, replay attacks, and endpoint compromises.
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                Internet Transport: TLS 1.3, QUIC & WireGuard
+              </h4>
+              <p>
+                <strong>TLS 1.3 (RFC 8446):</strong> Complete ground-up rewrite of Transport Layer Security. Stripped away all legacy vulnerable options: static RSA key exchange (no forward secrecy), CBC mode (padding oracles), SHA-1, and insecure renegotiation.
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>1-RTT Handshake:</strong> Client sends ephemeral key share in the very first <code>ClientHello</code> packet, establishing encrypted communications in a single round-trip.</li>
+                <li><strong>Encrypted Client Hello (ECH):</strong> Encrypts the Server Name Indication (SNI) extension using the server's public key distributed via DNS (HTTPS record), preventing network ISPs and eavesdroppers from seeing which domain the user is visiting.</li>
+              </ul>
+              <p>
+                <strong>QUIC (RFC 9000):</strong> Multiplexed UDP-based transport protocol powering HTTP/3. Embeds TLS 1.3 directly into the transport layer, eliminating head-of-line blocking and enabling seamless connection migration when switching from Wi-Fi to cellular networks.
+              </p>
+              <p>
+                <strong>WireGuard (Jason A. Donenfeld):</strong> An extremely high-performance kernel-level VPN based on the <em>Noise Protocol Framework</em> (IK pattern). Replaces 400,000 lines of complex IPsec code with under 4,000 lines of verified C, employing Curve25519, ChaCha20-Poly1305, BLAKE2s, and SipHash.
+              </p>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                End-to-End Messaging: Signal Protocol & MLS
+              </h4>
+              <p>
+                <strong>Signal Double Ratchet Algorithm:</strong> The gold standard of end-to-end encrypted messaging (used in Signal, WhatsApp, and Google Messages). Combines two distinct ratchets:
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>Symmetric KDF Chain Ratchet:</strong> Advances with every single message, generating ephemeral message keys that are immediately destroyed. Provides <strong>Forward Secrecy</strong> (an adversary who compromises the current device cannot decrypt past messages).</li>
+                <li><strong>Diffie-Hellman Ratchet:</strong> Advances with every round-trip conversational exchange by generating fresh DH ephemeral keys. Provides <strong>Post-Compromise Security (Future Secrecy)</strong>: even if an adversary extracts the complete device memory, the next message exchange injects fresh entropy and automatically heals the channel, locking the adversary out of future communications!</li>
+                <li><strong>Signal PQXDH:</strong> Integrates post-quantum ML-KEM-1024 alongside X25519 in the initial handshake ratchet.</li>
+              </ul>
+              <p>
+                <strong>MLS (Messaging Layer Security, RFC 9420):</strong> Scalable group messaging standard using <em>TreeKEM</em>, allowing secure end-to-end encryption for groups with up to 50,000 participants with $O(\log N)$ update overhead instead of Signal's pairwise $O(N)$ overhead.
+              </p>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                FIDO2, WebAuthn, Passkeys & HPKE
+              </h4>
+              <p>
+                <strong>FIDO2 / WebAuthn & Passkeys:</strong> Replaces passwords with public-key cryptography. The user's device (secure enclave, YubiKey) generates a unique asymmetric key pair bound to the website's exact origin domain. Authentications sign a server challenge using the private key via the browser's <code>navigator.credentials.create()</code> API. <strong>Completely eliminates credential phishing, SIM swapping, and credential stuffing by design!</strong>
+              </p>
+              <p>
+                <strong>HPKE (Hybrid Public Key Encryption, RFC 9180):</strong> Standardizes modern hybrid encryption combining an arbitrary KEM (e.g. DHKEM, ML-KEM), KDF (HKDF), and AEAD (AES-GCM / ChaCha20-Poly1305), used in Encrypted Client Hello and Apple's Private Relay.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive Protocol Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Handshake & Ratchet Protocol Simulator</div>
+                  <div class="lab-subtitle">TLS 1.3 1-RTT &middot; Signal Double Ratchet &middot; Merkle Proofs</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div class="segmented-pills">
+                <button class="segmented-pill proto-tab-btn active" data-tab="tls">TLS 1.3 Handshake</button>
+                <button class="segmented-pill proto-tab-btn" data-tab="ratchet">Signal Double Ratchet</button>
+                <button class="segmented-pill proto-tab-btn" data-tab="merkle">Merkle Tree Proofs</button>
+              </div>
+
+              <!-- VIEW 1: TLS 1.3 Handshake -->
+              <div id="proto-view-tls">
+                <div class="input-row" style="margin-bottom: 8px;">
+                  <button class="lab-action-btn tls-step-btn active" data-step="0" style="padding: 0.35rem;">1. ClientHello (PQC)</button>
+                  <button class="lab-action-btn tls-step-btn" data-step="1" style="padding: 0.35rem;">2. ServerHello + Cert</button>
+                  <button class="lab-action-btn tls-step-btn" data-step="2" style="padding: 0.35rem;">3. Traffic Encryption</button>
+                </div>
+                <div id="tls-step-details" class="output-box"></div>
+              </div>
+
+              <!-- VIEW 2: Signal Double Ratchet -->
+              <div id="proto-view-ratchet" style="display: none;">
+                <div class="input-row" style="margin-bottom: 8px;">
+                  <button class="lab-action-btn" id="btn-ratchet-send" style="padding: 0.4rem;">Send Next Message &rarr;</button>
+                  <button class="lab-action-btn" id="btn-ratchet-compromise" style="padding: 0.4rem; border-color: var(--accent-crimson);">Compromise Device RAM</button>
+                  <button class="btn-icon" id="btn-ratchet-reset" style="width: auto; padding: 0.4rem 0.8rem; font-size: 0.75rem;">Reset</button>
+                </div>
+                <div id="ratchet-state-display" class="output-box"></div>
+              </div>
+
+              <!-- VIEW 3: Merkle Tree Proofs -->
+              <div id="proto-view-merkle" style="display: none;">
+                <div class="control-label" style="margin-bottom: 6px;">Select a Transaction to inspect its O(log N) Cryptographic Audit Path</div>
+                <div class="input-row" style="margin-bottom: 8px;">
+                  <button class="lab-action-btn merkle-leaf-select" data-leaf="0" style="padding: 0.35rem; font-size: 0.72rem;">Tx 1 (Alice)</button>
+                  <button class="lab-action-btn merkle-leaf-select" data-leaf="1" style="padding: 0.35rem; font-size: 0.72rem;">Tx 2 (Carol)</button>
+                  <button class="lab-action-btn merkle-leaf-select" data-leaf="2" style="padding: 0.35rem; font-size: 0.72rem;">Tx 3 (Eve)</button>
+                  <button class="lab-action-btn merkle-leaf-select" data-leaf="3" style="padding: 0.35rem; font-size: 0.72rem;">Tx 4 (Grace)</button>
+                </div>
+                <div id="merkle-proof-display" class="output-box"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 11: LIGHTWEIGHT CRYPTOGRAPHY (IoT & EMBEDDED)
+           ========================================================================= -->
+      <section id="section-11-lightweight" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-iot">Domain 11 // Resource-Constrained</span>
+            <span class="section-security-level">Official Standard: NIST SP 800-232 (Ascon, Finalized 2025)</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">11.</span> Lightweight Cryptography for IoT & Embedded Systems</h3>
+          <p class="section-lead">
+            Billions of Internet of Things (IoT) microcontrollers, automotive CAN buses, passive RFID tags, and medical implants operate on sub-milliwatt power budgets and tiny silicon footprints where standard AES-256 or SHA-3 would consume too much battery and silicon area. Lightweight cryptography optimizes for Gate Equivalents (GE), RAM footprint, and energy per bit.
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y1="9"/><line x1="1" y1="14" x2="4" y1="14"/></svg>
+                NIST SP 800-232: The Ascon Family (Finalized 2025)
+              </h4>
+              <p>
+                In February 2023, following a rigorous multi-year international competition, NIST officially selected <strong>Ascon</strong> as the new global lightweight standard, finalized in 2025 as <strong>NIST SP 800-232</strong>.
+              </p>
+              <p>
+                Designed by Graz University of Technology, Infineon Technologies, and Lamarr Security Research, Ascon operates a sponge duplex construction over a compact <strong>320-bit state</strong> ($5 \times 64$-bit words $x_0, x_1, x_2, x_3, x_4$). Each round of permutation consists of:
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>Constant Addition ($p_C$):</strong> Injects an 8-bit round constant into word $x_2$.</li>
+                <li><strong>Substitution Layer ($p_S$):</strong> Applies a 5-bit non-linear S-box across the 5 words in a bit-sliced manner, ensuring complete resistance to timing attacks.</li>
+                <li><strong>Linear Diffusion Layer ($p_L$):</strong> Applies 64-bit right-rotations: $\Sigma_i(x_i) = x_i \oplus (x_i \ggg r_{i,1}) \oplus (x_i \ggg r_{i,2})$.</li>
+              </ul>
+              <p>
+                Ascon-128 provides 128-bit security using only ~2,600 Gate Equivalents (GE) and features exceptional native resistance against Differential Power Analysis (DPA) side-channel attacks.
+              </p>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                Prominent Lightweight Block Ciphers
+              </h4>
+              <div class="subtopic-cards">
+                <div class="subtopic-card">
+                  <div class="subtopic-title">PRESENT <span class="standard-badge">ISO/IEC 29192-2</span></div>
+                  <div class="subtopic-desc">Ultra-lightweight SPN cipher with 64-bit block size and 4-bit S-boxes. Implemented in hardware with as few as 1,570 Gate Equivalents!</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">SIMON & SPECK <span class="standard-badge">NSA Lightweight</span></div>
+                  <div class="subtopic-desc">SIMON is optimized for hardware gate count (under 1,300 GE); SPECK is an ARX cipher optimized for low-end 8-bit microcontrollers (AVR/ARM Cortex-M0).</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">SKINNY & GIFT</div>
+                  <div class="subtopic-desc">Tweakable lightweight block ciphers offering strong provable security bounds against differential cryptanalysis.</div>
+                </div>
+                <div class="subtopic-card">
+                  <div class="subtopic-title">TinyJAMBU & Xoodyak</div>
+                  <div class="subtopic-desc">Finalists in the NIST competition. TinyJAMBU uses a sliding 128-bit permutation; Xoodyak utilizes the Cyclist sponge mode over a 384-bit state.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Lightweight Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Lightweight Ascon State Permutation Visualizer</div>
+                  <div class="lab-subtitle">NIST SP 800-232 &middot; 320-Bit State &middot; Hardware GE Benchmarks</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span class="control-label">Ascon-128 320-Bit State (5 &times; 64-bit Words)</span>
+                <span class="value-badge">Round: <span id="ascon-round-num">0</span> / 12</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 4px; font-family: var(--font-mono); font-size: 0.75rem;">
+                <div class="subtopic-card" style="padding: 6px;"><small style="color: var(--text-muted);">Word x0:</small> <span id="ascon-x0" style="color: var(--accent-cyan);">0x0000000000000000</span></div>
+                <div class="subtopic-card" style="padding: 6px;"><small style="color: var(--text-muted);">Word x1:</small> <span id="ascon-x1" style="color: var(--accent-cyan);">0x0000000000000000</span></div>
+                <div class="subtopic-card" style="padding: 6px;"><small style="color: var(--text-muted);">Word x2:</small> <span id="ascon-x2" style="color: var(--accent-cyan);">0x0000000000000000</span></div>
+                <div class="subtopic-card" style="padding: 6px;"><small style="color: var(--text-muted);">Word x3:</small> <span id="ascon-x3" style="color: var(--accent-cyan);">0x0000000000000000</span></div>
+                <div class="subtopic-card" style="padding: 6px;"><small style="color: var(--text-muted);">Word x4:</small> <span id="ascon-x4" style="color: var(--accent-cyan);">0x0000000000000000</span></div>
+              </div>
+
+              <div class="input-row" style="margin-top: 8px;">
+                <button class="lab-action-btn" id="btn-ascon-round" style="padding: 0.45rem;">Execute Next Permutation Round ($p_C \to p_S \to p_L$)</button>
+                <button class="btn-icon" id="btn-ascon-reset" style="width: auto; padding: 0.45rem 0.8rem; font-size: 0.75rem;">Reset</button>
+              </div>
+
+              <div id="ascon-step-status" class="output-box" style="font-size: 0.78rem;">
+                State initialized. Click button to advance through Ascon permutation rounds.
+              </div>
+
+              <!-- Hardware GE Benchmarks -->
+              <div class="benchmark-container" style="margin-top: 10px;">
+                <div class="control-label">Hardware Footprint (Gate Equivalents - Lower is Better for IoT)</div>
+                <div class="benchmark-row">
+                  <div class="benchmark-label-row"><span>SIMON 64/128</span><span>1,230 GE</span></div>
+                  <div class="benchmark-track"><div class="benchmark-fill fill-emerald" style="width: 10%;"></div></div>
+                </div>
+                <div class="benchmark-row">
+                  <div class="benchmark-label-row"><span>PRESENT</span><span>1,570 GE</span></div>
+                  <div class="benchmark-track"><div class="benchmark-fill fill-cyan" style="width: 13%;"></div></div>
+                </div>
+                <div class="benchmark-row">
+                  <div class="benchmark-label-row"><span>Ascon-128 (NIST SP 800-232 Standard)</span><span>2,600 GE (Full AEAD)</span></div>
+                  <div class="benchmark-track"><div class="benchmark-fill fill-violet" style="width: 22%;"></div></div>
+                </div>
+                <div class="benchmark-row">
+                  <div class="benchmark-label-row"><span>Standard AES-128</span><span>12,000+ GE</span></div>
+                  <div class="benchmark-track"><div class="benchmark-fill fill-amber" style="width: 100%;"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           TOPIC 12: THE NEWEST DEVELOPMENTS & CUTTING-EDGE FRONTIER
+           ========================================================================= -->
+      <section id="section-12-frontier" class="crypto-section">
+        <div class="section-header">
+          <div class="section-meta">
+            <span class="section-tag tag-frontier">Domain 12 // 2024–2026+ Roadmap</span>
+            <span class="section-security-level">Strategic Threat Analysis & Crypto-Agility Migration</span>
+          </div>
+          <h3 class="section-title"><span class="section-num">12.</span> Cutting-Edge Cryptographic Developments & Threat Radar</h3>
+          <p class="section-lead">
+            The cryptographic landscape is experiencing unprecedented velocity. Between NIST's August 2024 release of FIPS 203/204/205, the 2025 finalization of FN-DSA, the selection of HQC as a non-lattice backup KEM, NIST's on-ramp signature competition (SQIsign, MAYO, UOV, FAEST), and breakthroughs in zero-knowledge folding schemes and practical FHE hardware acceleration, cybersecurity architectures must adopt <strong>Crypto-Agility</strong> immediately.
+          </p>
+        </div>
+
+        <div class="topic-grid">
+          <div class="theory-card">
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                The 2024–2035 Cryptographic Transition Timeline
+              </h4>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;">
+                <li><strong>August 2024:</strong> NIST officially publishes FIPS 203 (ML-KEM), FIPS 204 (ML-DSA), and FIPS 205 (SLH-DSA). Major operating systems and browsers activate hybrid <code>X25519MLKEM768</code> by default.</li>
+                <li><strong>2025:</strong> NIST finalizes FIPS 206 (FN-DSA / Falcon) and selects <strong>HQC (Hamming Quasi-Cyclic)</strong> as the primary non-lattice backup KEM. Ascon is finalized as NIST SP 800-232.</li>
+                <li><strong>2026:</strong> NIST concludes the PQC On-Ramp Competition for additional signature schemes (evaluating SQIsign, MAYO, UOV, and FAEST).</li>
+                <li><strong>2030:</strong> US Commercial National Security Algorithm (CNSA 2.0) mandate takes effect, requiring all US national security systems, software, and firmware to operate exclusively with post-quantum algorithms. Classical RSA-2048 and ECDSA are formally deprecated.</li>
+                <li><strong>2033–2035 (Y2Q):</strong> The projected arrival window for a Cryptanalytically Relevant Quantum Computer (CRQC). Any data encrypted with classical public-key cryptography without post-quantum protection is decrypted worldwide.</li>
+              </ul>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Mosca's Theorem & "Harvest Now, Decrypt Later" (HNDL)
+              </h4>
+              <p>
+                Dr. Michele Mosca established the mathematical theorem governing when an organization must begin its post-quantum migration:
+              </p>
+              <div class="math-box">
+                $$\text{If } S + M > Q, \quad \text{your data is ALREADY in critical danger!}$$
+              </div>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li>$S$: <strong>Shelf Life</strong> (how many years data must remain confidential: medical records 30y, financial/intelligence data 20y).</li>
+                <li>$M$: <strong>Migration Duration</strong> (how many years required to re-architect all hardware, software, certificates, and protocols: typically 5–10 years).</li>
+                <li>$Q$: <strong>Time to Quantum Break</strong> (estimated years until a CRQC is operational: estimated at ~8–12 years).</li>
+              </ul>
+              <div class="vuln-box">
+                <div class="vuln-box-title">&times; Active Cyber Threat // Harvest Now, Decrypt Later (HNDL)</div>
+                <p>Foreign intelligence agencies and state-sponsored APT groups are actively tapping fiber-optic cables and recording encrypted Internet traffic today. Even though they cannot decrypt it now, they will retroactively decrypt all recorded RSA/ECC sessions as soon as a CRQC is completed. <em>Deploying hybrid PQC immediately is the only defense.</em></p>
+              </div>
+            </div>
+
+            <div class="theory-block">
+              <h4 class="theory-section-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                Crypto-Agility Architecture
+              </h4>
+              <p>
+                Because cryptographic assumptions can collapse unexpectedly (as demonstrated by SIKE and Rainbow in 2022), modern enterprise systems must be designed for <strong>Crypto-Agility</strong>:
+              </p>
+              <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <li><strong>No Hardcoded Primitives:</strong> All algorithms must be configured dynamically via policy configuration files rather than hardcoded logic.</li>
+                <li><strong>Composite Certificates (IETF X.509 Draft):</strong> Dual-key certificates carrying both a classical signature (e.g. ECDSA) and a post-quantum signature (ML-DSA) to guarantee backwards compatibility.</li>
+                <li><strong>Buffer & MTU Headroom:</strong> Network stacks must accommodate multi-kilobyte public keys and signatures without TCP packet fragmentation failure.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Interactive Frontier Lab -->
+          <div class="lab-card">
+            <div class="lab-header">
+              <div class="lab-title-group">
+                <div class="lab-indicator"></div>
+                <div>
+                  <div class="lab-title">Cryptographic Threat & Migration Radar</div>
+                  <div class="lab-subtitle">Mosca Y2Q Calculator &middot; Algorithm Mortality &middot; Nginx Agility Config</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lab-body">
+              <!-- Mosca Y2Q Calculator -->
+              <div class="control-label" style="margin-bottom: 6px;">Mosca's Theorem: Quantum Risk Assessment Calculator</div>
+              <div class="control-group">
+                <label class="control-label">Data Confidentiality Shelf-Life ($S$): <span id="mosca-shelf-val" class="value-badge">15 years</span></label>
+                <input type="range" id="mosca-shelf" min="1" max="40" value="15" class="crypto-slider">
+              </div>
+              <div class="input-row">
+                <div class="control-group">
+                  <label class="control-label">Migration Duration ($M$): <span id="mosca-migrate-val" class="value-badge">5 years</span></label>
+                  <input type="range" id="mosca-migrate" min="1" max="15" value="5" class="crypto-slider">
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Years until Quantum CRQC ($Q$): <span id="mosca-quantum-val" class="value-badge">8 years</span></label>
+                  <input type="range" id="mosca-quantum" min="3" max="25" value="8" class="crypto-slider">
+                </div>
+              </div>
+              <div id="mosca-risk-out"></div>
+
+              <!-- Searchable Algorithm Mortality Table -->
+              <div style="margin-top: 12px; border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span class="control-label">Algorithm Mortality & Status Table</span>
+                  <input type="text" id="mortality-filter" class="crypto-input" placeholder="Filter (e.g. RSA, Kyber, Broken)..." style="width: 180px; padding: 0.3rem 0.6rem; font-size: 0.72rem;">
+                </div>
+                <div style="overflow-x: auto; max-height: 180px; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+                  <table style="width: 100%; border-collapse: collapse; font-family: var(--font-mono);">
+                    <thead>
+                      <tr style="background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.68rem; text-transform: uppercase;">
+                        <th style="padding: 6px;">Algorithm</th>
+                        <th style="padding: 6px;">Category</th>
+                        <th style="padding: 6px;">Status</th>
+                        <th style="padding: 6px;">Vulnerability / Standard Note</th>
+                      </tr>
+                    </thead>
+                    <tbody id="mortality-table-body">
+                      <!-- Populated by frontier-lab.js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Production Crypto-Agile Nginx Configuration Generator -->
+              <div style="margin-top: 12px; border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+                <div class="output-header">
+                  <span class="output-title">Crypto-Agile Nginx / OpenSSL 3.4+ Configuration</span>
+                  <button class="copy-btn" id="btn-copy-config">Copy Config</button>
+                </div>
+                <pre id="agility-config-out" class="math-box" style="font-size: 0.72rem; line-height: 1.4; white-space: pre-wrap; margin: 4px 0;"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="app-footer">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <div class="brand-wrapper">
+              <div class="brand-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </div>
+              <div class="brand-text">
+                <h2>CRYPTIX</h2>
+              </div>
+            </div>
+            <p>
+              The definitive, interactive masterwork of Classical, Modern, and Post-Quantum Cryptography. Built with mathematical rigor and cybersecurity best practices for students, engineers, and researchers worldwide.
+            </p>
+          </div>
+
+          <div class="footer-links-group">
+            <div class="footer-col">
+              <h4>Topics</h4>
+              <ul>
+                <li><a href="#section-1-classical">Classical Ciphers</a></li>
+                <li><a href="#section-2-symmetric">Symmetric & AES</a></li>
+                <li><a href="#section-3-aead">AEAD & MACs</a></li>
+                <li><a href="#section-4-hash">Hashes & ZK</a></li>
+                <li><a href="#section-5-kdf">KDF & PAKE</a></li>
+                <li><a href="#section-6-publickey">Classical Public-Key</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Frontier</h4>
+              <ul>
+                <li><a href="#section-7-pqc">Post-Quantum (FIPS 203)</a></li>
+                <li><a href="#section-8-quantum">Quantum Proper & QKD</a></li>
+                <li><a href="#section-9-advanced">ZKPs, FHE & MPC</a></li>
+                <li><a href="#section-10-protocols">TLS 1.3 & Signal</a></li>
+                <li><a href="#section-11-lightweight">Lightweight Ascon</a></li>
+                <li><a href="#section-12-frontier">2026+ Threat Radar</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>&copy; 2026 CRYPTIX. Designed for Global Open-Source Cybersecurity Education.</div>
+          <div>100% Client-Side &middot; Zero Tracking &middot; GitHub Pages Ready</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Global Search Modal (Ctrl+K) -->
+  <div class="modal-overlay" id="search-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Global Cryptographic Index</div>
+        <button class="modal-close-btn" id="btn-close-search">&times;</button>
+      </div>
+      <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-subtle);">
+        <input type="text" id="global-search-input" class="crypto-input" placeholder="Search algorithms (e.g. ML-KEM, Enigma, ChaCha20, Argon2, BB84, ZK-STARK)..." autofocus>
+      </div>
+      <div class="modal-body" id="search-results-list" style="max-height: 400px;">
+        <!-- Filter results -->
+      </div>
+    </div>
+  </div>
+
+  <!-- GitHub Pages Deployment Guide Modal -->
+  <div class="modal-overlay" id="deploy-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Publish Directly to GitHub Pages</div>
+        <button class="modal-close-btn" id="btn-close-deploy">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>This entire platform is built with <strong>zero external build tools, zero Node.js dependencies, and 100% static client-side architecture</strong>. You can publish it to your GitHub live URL in under 60 seconds:</p>
+
+        <h5 style="color: var(--accent-cyan); font-size: 0.95rem; margin: 1.25rem 0 0.5rem;">Step 1: Create a GitHub Repository</h5>
+        <p>Go to <a href="https://github.com/new" target="_blank" style="color: var(--accent-cyan);">github.com/new</a> and create a repository (e.g. <code>cryptography-masterwork</code>).</p>
+
+        <h5 style="color: var(--accent-cyan); font-size: 0.95rem; margin: 1.25rem 0 0.5rem;">Step 2: Push the Files</h5>
+        <pre class="math-box" style="font-size: 0.8rem; white-space: pre-wrap;">git init
+git add .
+git commit -m "Deploy Cryptix platform"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/cryptography-masterwork.git
+git push -u origin main</pre>
+
+        <h5 style="color: var(--accent-cyan); font-size: 0.95rem; margin: 1.25rem 0 0.5rem;">Step 3: Enable GitHub Pages</h5>
+        <ol style="padding-left: 1.5rem; font-size: 0.88rem; line-height: 1.6;">
+          <li>In your GitHub repo, click <strong>Settings</strong> &rarr; <strong>Pages</strong> (in the left sidebar).</li>
+          <li>Under <strong>Build and deployment &rarr; Source</strong>, select <strong>Deploy from a branch</strong>.</li>
+          <li>Under <strong>Branch</strong>, choose <code>main</code> and folder <code>/ (root)</code>, then click <strong>Save</strong>.</li>
+          <li>Wait ~30 seconds, and your website will be live at: <br><code style="color: var(--accent-emerald);">https://YOUR_USERNAME.github.io/cryptography-masterwork/</code></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Controller & Lab Scripts -->
+  <script src="js/canvas-bg.js"></script>
+  <script src="js/labs/historical-lab.js"></script>
+  <script src="js/labs/symmetric-lab.js"></script>
+  <script src="js/labs/aead-lab.js"></script>
+  <script src="js/labs/hash-lab.js"></script>
+  <script src="js/labs/kdf-lab.js"></script>
+  <script src="js/labs/publickey-lab.js"></script>
+  <script src="js/labs/pqc-lab.js"></script>
+  <script src="js/labs/quantum-lab.js"></script>
+  <script src="js/labs/zkp-lab.js"></script>
+  <script src="js/labs/protocol-lab.js"></script>
+  <script src="js/labs/lightweight-lab.js"></script>
+  <script src="js/labs/frontier-lab.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
