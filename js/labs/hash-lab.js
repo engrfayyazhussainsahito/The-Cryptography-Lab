@@ -17,10 +17,6 @@ window.HashLab = {
       if (!input) return;
       let val = input.value || 'CyberSecurity';
       const firstChar = val.charCodeAt(0);
-<<<<<<< HEAD
-=======
-      // Flip the lowest bit of the first character
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       val = String.fromCharCode(firstChar ^ 0x01) + val.slice(1);
       input.value = val;
       this.update();
@@ -37,10 +33,6 @@ window.HashLab = {
     };
   },
 
-<<<<<<< HEAD
-=======
-  // Pseudo-Keccak 256 for comparison
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   computeKeccak(str) {
     let h = 0x6a09e667;
     for (let i = 0; i < str.length; i++) {
@@ -58,7 +50,6 @@ window.HashLab = {
   async update() {
     const inputVal = document.getElementById('hash-input')?.value || 'CyberSecurity';
 
-<<<<<<< HEAD
     const originalHash = await this.computeSha256(inputVal);
     const keccakHash = this.computeKeccak(inputVal);
 
@@ -67,28 +58,11 @@ window.HashLab = {
     if (s256El) s256El.textContent = originalHash.hex;
     if (s3El) s3El.textContent = keccakHash;
 
-=======
-    // 1. Compute Hash for original input
-    const originalHash = await this.computeSha256(inputVal);
-    const keccakHash = this.computeKeccak(inputVal);
-
-    document.getElementById('hash-sha256-out').textContent = originalHash.hex;
-    document.getElementById('hash-sha3-out').textContent = keccakHash;
-
-    // 2. Compute 1-bit modified input for Strict Avalanche Criterion test
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const firstCode = inputVal.charCodeAt(0) || 65;
     const modifiedInput = String.fromCharCode(firstCode ^ 0x01) + inputVal.slice(1);
     const modifiedHash = await this.computeSha256(modifiedInput);
 
-<<<<<<< HEAD
     this.renderAvalancheGrid(originalHash.bytes, modifiedHash.bytes);
-=======
-    // 3. Render 256-bit Avalanche Difference Matrix (16x16 grid)
-    this.renderAvalancheGrid(originalHash.bytes, modifiedHash.bytes);
-
-    // 4. Update Poseidon preview
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     this.updatePoseidon(inputVal);
   },
 
@@ -122,11 +96,7 @@ window.HashLab = {
       statsEl.innerHTML = `
         <span style="color: var(--accent-cyan); font-weight: 700;">${flippedCount} / ${totalBits}</span> bits flipped
         (<strong style="color: ${pct >= 45 && pct <= 55 ? 'var(--accent-emerald)' : 'var(--accent-amber)'};">${pct}%</strong>).
-<<<<<<< HEAD
         <em>Ideal target is ~50.00% under the Strict Avalanche Criterion (SAC).</em>
-=======
-        <em>Ideal cryptographic target is exactly 50.00% under the Strict Avalanche Criterion (SAC).</em>
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       `;
     }
   },
@@ -135,11 +105,6 @@ window.HashLab = {
     const el = document.getElementById('poseidon-step-preview');
     if (!el) return;
 
-<<<<<<< HEAD
-=======
-    // Poseidon works over prime field F_p (e.g. BN254 field p = 21888242871839275222246405745257275088548364400416034343698204186575808495617)
-    // S-Box is x^5 mod p (low degree non-linear layer minimizing R1CS constraints)
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     let seed = 0;
     for (let i = 0; i < input.length; i++) seed = (seed * 31 + input.charCodeAt(i)) % 10007;
 
@@ -152,11 +117,7 @@ window.HashLab = {
       <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">
         State Vector: [x<sub>0</sub>: ${seed}, x<sub>1</sub>: ${seed + 1}, x<sub>2</sub>: ${seed + 2}] &isin; &Fopf;<sub>p</sub><br>
         S-Box Layer &sigma;(x) = x<sup>5</sup> mod p &rarr; [${r1}, ${r2}, ${r3}]<br>
-<<<<<<< HEAD
         <span style="color: var(--text-muted); font-size: 0.72rem;">MDS Matrix Diffusion Layer over prime field &Fopf;<sub>p</sub> follows. Low R1CS constraints in zk-SNARKs.</span>
-=======
-        <span style="color: var(--text-muted); font-size: 0.72rem;">MDS Matrix Diffusion Layer over finite field &Fopf;<sub>p</sub> applied next. Extremely low R1CS constraints in zk-SNARKs (PLONK/Groth16).</span>
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       </div>
     `;
   }

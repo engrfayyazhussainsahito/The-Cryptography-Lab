@@ -25,7 +25,6 @@ window.KdfLab = {
     const pbkdf2Iter = parseInt(document.getElementById('pbkdf2-iter')?.value || '600000', 10);
     const bcryptCost = parseInt(document.getElementById('bcrypt-cost')?.value || '12', 10);
 
-<<<<<<< HEAD
     const memValEl = document.getElementById('argon-mem-val');
     const iterValEl = document.getElementById('argon-iter-val');
     const threadsValEl = document.getElementById('argon-threads-val');
@@ -59,37 +58,6 @@ window.KdfLab = {
     if (hBc) hBc.textContent = `${bcryptClusterHps.toLocaleString()} H/s`;
     if (hAr) hAr.textContent = `${argonClusterHps.toLocaleString()} H/s`;
 
-=======
-    // Update labels
-    document.getElementById('argon-mem-val').textContent = `${memMB} MB`;
-    document.getElementById('argon-iter-val').textContent = `${iter} passes`;
-    document.getElementById('argon-threads-val').textContent = `${threads} threads`;
-    document.getElementById('pbkdf2-iter-val').textContent = `${pbkdf2Iter.toLocaleString()}`;
-    document.getElementById('bcrypt-cost-val').textContent = `2^${bcryptCost} rounds`;
-
-    // Calculate approximate GPU cracking rate on an 8x NVIDIA RTX 4090 cluster:
-    // PBKDF2-SHA256: RTX 4090 does ~5,000 MH/s for raw SHA256. At 600,000 iter: ~8,300 H/s per card = ~66,000 H/s cluster
-    const pbkdf2ClusterHps = Math.max(1, Math.floor(5000000000 / pbkdf2Iter) * 8);
-
-    // bcrypt: RTX 4090 does ~120 kH/s at cost 5. At cost 12: ~1,800 H/s per card = ~14,400 H/s cluster
-    const bcryptClusterHps = Math.max(1, Math.floor(120000 / Math.pow(2, bcryptCost - 5)) * 8);
-
-    // Argon2id: At 64MB memory, a GPU has 24GB VRAM. It can run at most 375 concurrent instances!
-    // Bandwidth bottlenecked to ~120 H/s per card = ~960 H/s cluster!
-    const argonClusterHps = Math.max(1, Math.floor((24000 / memMB) * (15 / iter)) * 8);
-
-    // Render bars
-    const maxHps = Math.max(pbkdf2ClusterHps, bcryptClusterHps, argonClusterHps);
-    document.getElementById('bar-pbkdf2').style.width = `${Math.min(100, Math.max(5, (pbkdf2ClusterHps / maxHps) * 100))}%`;
-    document.getElementById('bar-bcrypt').style.width = `${Math.min(100, Math.max(5, (bcryptClusterHps / maxHps) * 100))}%`;
-    document.getElementById('bar-argon2').style.width = `${Math.min(100, Math.max(5, (argonClusterHps / maxHps) * 100))}%`;
-
-    document.getElementById('hps-pbkdf2').textContent = `${pbkdf2ClusterHps.toLocaleString()} H/s`;
-    document.getElementById('hps-bcrypt').textContent = `${bcryptClusterHps.toLocaleString()} H/s`;
-    document.getElementById('hps-argon2').textContent = `${argonClusterHps.toLocaleString()} H/s`;
-
-    // Estimated time for 8-char alphanumeric password (62^8 = 218 trillion combinations)
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     const totalCombos = 2.18e14;
     const formatTime = (seconds) => {
       if (seconds < 60) return `${Math.round(seconds)} seconds`;
@@ -101,7 +69,6 @@ window.KdfLab = {
       return `${years.toExponential(1)} years`;
     };
 
-<<<<<<< HEAD
     const tPb = document.getElementById('time-pbkdf2');
     const tBc = document.getElementById('time-bcrypt');
     const tAr = document.getElementById('time-argon2');
@@ -109,11 +76,6 @@ window.KdfLab = {
     if (tPb) tPb.textContent = formatTime(totalCombos / pbkdf2ClusterHps);
     if (tBc) tBc.textContent = formatTime(totalCombos / bcryptClusterHps);
     if (tAr) tAr.textContent = formatTime(totalCombos / argonClusterHps);
-=======
-    document.getElementById('time-pbkdf2').textContent = formatTime(totalCombos / pbkdf2ClusterHps);
-    document.getElementById('time-bcrypt').textContent = formatTime(totalCombos / bcryptClusterHps);
-    document.getElementById('time-argon2').textContent = formatTime(totalCombos / argonClusterHps);
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   },
 
   pakeStep: 0,
@@ -127,15 +89,9 @@ window.KdfLab = {
     const statusEl = document.getElementById('pake-flow-status');
     const descriptions = [
       'Step 1: Client blinds password using random scalar r: &alpha; = H<sub>1</sub>(Password)<sup>r</sup> and sends &alpha; to Server. (Server sees only blinded entropy).',
-<<<<<<< HEAD
       'Step 2: Server evaluates Oblivious PRF (OPRF) using secret key k: &beta; = &alpha;<sup>k</sup> and returns &beta; with encrypted credential envelope.',
       'Step 3: Client unblinds &beta; using r<sup>-1</sup> to compute PRF output: rw = &beta;<sup>r<sup>-1</sup></sup> = H<sub>1</sub>(P)<sup>k</sup>. Decrypts envelope to retrieve client private key.',
       'Step 4: Authenticated Diffie-Hellman Key Exchange completes! Both parties compute identical Session Key K. Eavesdropper or server cannot perform offline dictionary attacks!'
-=======
-      'Step 2: Server evaluates Oblivious PRF (OPRF) using its secret key k: &beta; = &alpha;<sup>k</sup> and returns &beta; with encrypted envelope.',
-      'Step 3: Client unblinds &beta; using r<sup>-1</sup> to compute PRF output: rw = &beta;<sup>r<sup>-1</sup></sup> = H<sub>1</sub>(P)<sup>k</sup>. Decrypts envelope to retrieve client private key.',
-      'Step 4: Authenticated Diffie-Hellman Key Exchange completes! Both parties compute identical Session Key K. Eavesdropper or rogue server cannot perform offline dictionary attacks!'
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     ];
     if (statusEl) statusEl.innerHTML = descriptions[this.pakeStep];
   }

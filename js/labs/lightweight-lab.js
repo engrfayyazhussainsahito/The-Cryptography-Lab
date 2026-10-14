@@ -5,22 +5,12 @@
  */
 
 window.LightweightLab = {
-<<<<<<< HEAD
   asconWords: [
     0x80400c0600000000n,
     0x0001020304050607n,
     0x08090a0b0c0d0e0fn,
     0x0000000000000001n,
     0x0000000000000002n
-=======
-  // Ascon 320-bit state: 5 words of 64 bits (represented as BigInt)
-  asconWords: [
-    0x80400c0600000000n, // x0: key/iv constant
-    0x0001020304050607n, // x1: key high
-    0x08090a0b0c0d0e0fn, // x2: key low
-    0x0000000000000001n, // x3: nonce high
-    0x0000000000000002n  // x4: nonce low
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   ],
   roundConstants: [
     0xf0n, 0xe1n, 0xd2n, 0xc3n, 0xb4n, 0xa5n,
@@ -59,12 +49,8 @@ window.LightweightLab = {
     ];
     this.currentRound = 0;
     this.renderState();
-<<<<<<< HEAD
     const stEl = document.getElementById('ascon-step-status');
     if (stEl) stEl.textContent = 'State reset to initial 320-bit vector.';
-=======
-    document.getElementById('ascon-step-status').textContent = 'State reset to initial 320-bit vector.';
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   },
 
   rotr64(x, n) {
@@ -75,27 +61,16 @@ window.LightweightLab = {
 
   runAsconRound() {
     if (this.currentRound >= 12) {
-<<<<<<< HEAD
       const stEl = document.getElementById('ascon-step-status');
       if (stEl) stEl.textContent = 'All 12 rounds of Ascon-p[12] completed.';
-=======
-      document.getElementById('ascon-step-status').textContent = 'All 12 rounds of Ascon-p[12] completed!';
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
       return;
     }
 
     const mask = 0xffffffffffffffffn;
     const cr = this.roundConstants[this.currentRound];
 
-<<<<<<< HEAD
     this.asconWords[2] = (this.asconWords[2] ^ cr) & mask;
 
-=======
-    // 1. Constant Addition p_C
-    this.asconWords[2] = (this.asconWords[2] ^ cr) & mask;
-
-    // 2. Substitution Layer p_S (bit-sliced 5-bit S-box)
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     let [x0, x1, x2, x3, x4] = this.asconWords;
     x0 ^= x4; x4 ^= x3; x2 ^= x1;
     let t0 = (~x0) & x1;
@@ -106,10 +81,6 @@ window.LightweightLab = {
     x0 ^= t1; x1 ^= t2; x2 ^= t3; x3 ^= t4; x4 ^= t0;
     x1 ^= x0; x0 ^= x4; x3 ^= x2; x2 = ~x2;
 
-<<<<<<< HEAD
-=======
-    // 3. Linear Diffusion Layer p_L
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
     x0 = (x0 ^ this.rotr64(x0, 19) ^ this.rotr64(x0, 28)) & mask;
     x1 = (x1 ^ this.rotr64(x1, 61) ^ this.rotr64(x1, 39)) & mask;
     x2 = (x2 ^ this.rotr64(x2, 1)  ^ this.rotr64(x2, 6))  & mask;
@@ -120,17 +91,11 @@ window.LightweightLab = {
     this.currentRound++;
     this.renderState();
 
-<<<<<<< HEAD
     const stEl = document.getElementById('ascon-step-status');
     if (stEl) {
       stEl.innerHTML = `
         <strong>Round #${this.currentRound} Executed:</strong> Added constant 0x${cr.toString(16)}, executed bit-sliced S-box, and diffused with 64-bit rotations.
       `;
     }
-=======
-    document.getElementById('ascon-step-status').innerHTML = `
-      <strong>Round #${this.currentRound} Executed:</strong> Added constant 0x${cr.toString(16)}, executed bit-sliced S-box, and diffused with 64-bit rotations.
-    `;
->>>>>>> 6404ca6f42488e9c1a7ad3269408722ce1c43c61
   }
 };
